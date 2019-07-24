@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ProveedorEventosService } from './providers/proveedor-eventos.service';
+import { ProveedorSesionesService } from './providers/proveedor-sesiones.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { ProveedorEventosService } from './providers/proveedor-eventos.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ProveedorEventosService
+    ProveedorEventosService,
+    ProveedorSesionesService
   ],
   bootstrap: [AppComponent]
 })

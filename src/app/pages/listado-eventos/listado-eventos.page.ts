@@ -29,7 +29,7 @@ export class ListadoEventosPage implements OnInit {
 
   eventoTapped(event, evento) {
     //this.router.navigate(['/evento-detalles', evento.idEvento]);
-    this.navCtrl.navigateForward('/evento-detalles/' + evento.idEvento);
+    this.navCtrl.navigateForward('/evento-detalles/' + evento.id);
   }
 
 }

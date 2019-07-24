@@ -71,7 +71,7 @@ export class InicioPage {
   //Función provisional, no utilizaremos el navCtrl para redireccionar sino routerLink del html
   eventoTapped(event, evento) {
     //this.router.navigate(['/evento-detalles', evento.idEvento]);
-    this.navCtrl.navigateForward('/evento-detalles/' + evento.idEvento);
+    this.navCtrl.navigateForward('/evento-detalles/' + evento.id);
   }
 
 }

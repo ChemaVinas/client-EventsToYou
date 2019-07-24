@@ -13,8 +13,9 @@
 
   <ion-list>
     <ion-card *ngFor="let evento of eventos">
+      <img src="../../../assets/img/concierto.jpg" />
       <ion-card-header>
-        <ion-card-subtitle>id: {{evento.idEvento}}</ion-card-subtitle>
+        <ion-card-subtitle>id: {{evento.id}}</ion-card-subtitle>
         <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
       </ion-card-header>
     
@@ -23,7 +24,7 @@
       </ion-card-content>
 
       <ion-item lines="none" color="myApp_color1">
-        <ion-button fill="clear" size="small" color="myApp_color2" slot="end" routerLink="/evento-detalles/{{evento.idEvento}}" routerDirection="forward">Ver más</ion-button>
+        <ion-button fill="clear" size="small" color="myApp_color2" slot="end" routerLink="/evento-detalles/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
         <!--<ion-button slot="start" (click)="eventoTapped($event, evento)">Ver (event onclick)</ion-button>-->
       </ion-item>
 
