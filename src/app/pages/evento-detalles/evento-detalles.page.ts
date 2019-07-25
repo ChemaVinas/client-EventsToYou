@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController} from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ export class EventoDetallesPage implements OnInit {
   id_evento: any;
   evento: any;
   sesiones: any;
+  valoraciones: any;
   sub;
 
   constructor(
@@ -21,11 +22,11 @@ export class EventoDetallesPage implements OnInit {
     public proveedorEventos: ProveedorEventosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {
-      //Obtenemos el id del evento como parámetro
-      this.id_evento = this.activatedRoute.snapshot.paramMap.get('eventoId');
-    }
+    //Obtenemos el id del evento como parámetro
+    this.id_evento = this.activatedRoute.snapshot.paramMap.get('eventoId');
+  }
 
-    async ngOnInit() {
+  async ngOnInit() {
 
     console.log('ngOnInit evento-detalles page');
 
@@ -47,32 +48,54 @@ export class EventoDetallesPage implements OnInit {
         }
       );
 
-    this.proveedorEventos.obtenerSesionesEvento(this.id_evento)
-    .subscribe(
-      async (data) => {
-        this.sesiones = data;
+    this.proveedorEventos.obtenerValoracionesEvento(this.id_evento)
+      .subscribe(
+        async (data) => {
+          this.valoraciones = data;
 
-        //Convertimos la fecha y almacenamos la hora
-        for(let sesion of this.sesiones){
-          var fecha_sesion = new Date(sesion.fecha);
-          
-          var fecha = fecha_sesion.toLocaleDateString();
-          var hora = fecha_sesion.toLocaleTimeString();
-          sesion.fecha = fecha+" - "+hora;
+          //Convertimos la fecha y almacenamos la hora
+          for (let valoracion of this.valoraciones) {
+            var fecha_sesion = new Date(valoracion.fecha);
+
+            var fecha = fecha_sesion.toLocaleDateString();
+            var hora = fecha_sesion.toLocaleTimeString();
+            valoracion.fecha = fecha + " - " + hora;
+          }
+
+          //await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
         }
+      );
 
-        await loading.dismiss();
-      },
-      (error) => {
-        console.log(error);
-        loading.dismiss();
-      }
-    );
+    this.proveedorEventos.obtenerSesionesEvento(this.id_evento)
+      .subscribe(
+        async (data) => {
+          this.sesiones = data;
+
+          //Convertimos la fecha y almacenamos la hora
+          for (let sesion of this.sesiones) {
+            var fecha_sesion = new Date(sesion.fecha);
+
+            var fecha = fecha_sesion.toLocaleDateString();
+            var hora = fecha_sesion.toLocaleTimeString();
+            sesion.fecha = fecha + " - " + hora;
+          }
+
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
 
   }
 
-  ionViewDidLoad(){
-    
+  ionViewDidLoad() {
+
   }
 
   ngAfterViewInit() {
