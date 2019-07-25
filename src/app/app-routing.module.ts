@@ -2,14 +2,27 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
-  { path: 'listado-eventos', loadChildren: './pages/listado-eventos/listado-eventos.module#ListadoEventosPageModule'},
-  {
-    path: 'evento-detalles/:eventoId',
+  { path: '',
+    loadChildren: './pages/tabs/tabs.module#TabsPageModule'
+  },
+  { path: 'listado-eventos',
+    loadChildren: './pages/listado-eventos/listado-eventos.module#ListadoEventosPageModule'
+  },
+  { path: 'evento-detalles/:eventoId',
     loadChildren: './pages/evento-detalles/evento-detalles.module#EventoDetallesPageModule'
   },
   { path: 'sesion-detalles/:sesionId',
-    loadChildren: './pages/sesion-detalles/sesion-detalles.module#SesionDetallesPageModule' }
+    loadChildren: './pages/sesion-detalles/sesion-detalles.module#SesionDetallesPageModule'
+  },
+  { path: 'listado-amigos',
+    loadChildren: './pages/listado-amigos/listado-amigos.module#ListadoAmigosPageModule'
+  },
+  { path: 'miembro-detalles/:login',
+    loadChildren: './pages/miembro-detalles/miembro-detalles.module#MiembroDetallesPageModule'
+  },
+  { path: 'organizador-detalles/:login',
+    loadChildren: './pages/organizador-detalles/organizador-detalles.module#OrganizadorDetallesPageModule'
+  }
   /*{
     path: '',
     redirectTo: '/app/tabs/home',

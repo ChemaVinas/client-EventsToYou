@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngIf="miembro" lines="none">
+    <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+    <ion-label text-wrap>
+      <h1>{{miembro.nombre}}</h1>
+      <ion-text color="myApp_color2">
+        <h2>@{{miembro.login}}</h2>
+        <hr>
+        <h4><ion-icon name="pin"></ion-icon> Ubicación: {{miembro.ubicacion}}</h4>
+        <h4><ion-icon name="calendar"></ion-icon> Fecha de alta: {{miembro.fecha_alta}}</h4>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-button expand="block" color="myApp_color3">Seguir</ion-button>
+
+  <ion-item *ngIf="miembro" lines="none">
+    <ion-label text-wrap>
+      <ion-text color="myApp_color6">
+        <h4><ion-icon name="book"></ion-icon> {{miembro.biografia}}</h4>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-segment (ionChange)="segmentChanged($event)" color="myApp_color3">
+    <ion-segment-button value="Apuntados">
+      <ion-icon name="hand"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Guardados">
+      <ion-icon name="heart"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Valoraciones">
+      <ion-icon name="star"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-content>

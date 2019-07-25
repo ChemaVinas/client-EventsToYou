@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Amigos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-text color="myApp_color2"><p>*Provisional: Se muestran todos los usuarios.*</p></ion-text>
+
+  <ion-list>
+    <ion-item routerLink="/miembro-detalles/{{miembro.login}}" *ngFor="let miembro of miembros">
+      <ion-avatar slot="start">
+        <img src="../../../assets/img/avatar_ejemplo.jpg">
+      </ion-avatar>
+      <ion-label text-wrap>
+        {{miembro.nombre}} - @{{miembro.login}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Organizadores
+    </ion-list-header>
+    <ion-item routerLink="/organizador-detalles/{{organizador.login}}" *ngFor="let organizador of organizadores">
+      <ion-avatar slot="start">
+        <img src="../../../assets/img/avatar_ejemplo.jpg">
+      </ion-avatar>
+      <ion-label text-wrap>
+        {{organizador.nombre}} - @{{organizador.login}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

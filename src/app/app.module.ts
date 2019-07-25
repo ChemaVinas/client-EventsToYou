@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ProveedorEventosService } from './providers/proveedor-eventos.service';
 import { ProveedorSesionesService } from './providers/proveedor-sesiones.service';
+import { ProveedorMiembrosService } from './providers/proveedor-miembros.service';
+import { ProveedorOrganizadoresService } from './providers/proveedor-organizadores.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +29,9 @@ import { ProveedorSesionesService } from './providers/proveedor-sesiones.service
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ProveedorEventosService,
-    ProveedorSesionesService
+    ProveedorSesionesService,
+    ProveedorMiembrosService,
+    ProveedorOrganizadoresService
   ],
   bootstrap: [AppComponent]
 })

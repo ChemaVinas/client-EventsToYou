@@ -19,6 +19,11 @@ export class AppComponent {
       title: 'Eventos',
       url: '/listado-eventos',
       icon: 'list'
+    },
+    {
+      title: 'Amigos',
+      url: '/listado-amigos',
+      icon: 'people'
     }
   ];
 
