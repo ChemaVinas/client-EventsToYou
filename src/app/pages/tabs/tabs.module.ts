@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: '../inicio/inicio.module#InicioPageModule'
       },
       {
+        path: 'ultima_actividad',
+        loadChildren: '../ultima-actividad/ultima-actividad.module#UltimaActividadPageModule'
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'

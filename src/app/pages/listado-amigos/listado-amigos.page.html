@@ -7,14 +7,16 @@
       Amigos
     </ion-title>
   </ion-toolbar>
+  <ion-item lines="full">
+    <ion-label>
+      <ion-text color="myApp_color2">Estos son todos los miembros que sigues</ion-text>
+    </ion-label>
+  </ion-item>
 </ion-header>
 
 <ion-content>
 
   <ion-list>
-    <ion-list-header>
-      <ion-text color="myApp_color2">Estos son todos los miembros que sigues</ion-text>
-    </ion-list-header>
     <ion-item routerLink="/miembro-detalles/{{amigo.login}}" *ngFor="let amigo of amigos">
       <ion-avatar slot="start">
         <img src="../../../assets/img/avatar_ejemplo.jpg">
