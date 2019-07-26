@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class OrganizadorDetallesPage implements OnInit {
 
   organizador;
+  eventos;
   login: any;
 
   constructor(
@@ -18,36 +19,48 @@ export class OrganizadorDetallesPage implements OnInit {
     public proveedorOrganizadores: ProveedorOrganizadoresService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {
-      //Obtenemos el login del organizador como parámetro
-      this.login = this.activatedRoute.snapshot.paramMap.get('login');
-    }
+    //Obtenemos el login del organizador como parámetro
+    this.login = this.activatedRoute.snapshot.paramMap.get('login');
+  }
 
-    async ngOnInit() {
+  async ngOnInit() {
 
-      console.log('ngOnInit organizador-detalles page');
-  
-      const loading = await this.loadingCtrl.create({
-        message: 'Cargando..',
-      });
-  
-      await loading.present();
-  
-      this.proveedorOrganizadores.obtenerOrganizador(this.login)
-        .subscribe(
-          async (data) => {
-            this.organizador = data;
+    console.log('ngOnInit organizador-detalles page');
 
-            var fecha_alta = new Date(this.organizador.fecha_alta);
-          
-            this.organizador.fecha_alta = fecha_alta.toLocaleDateString();
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
 
-            await loading.dismiss();
-          },
-          (error) => {
-            console.log(error);
-            loading.dismiss();
-          }
-        );
-    }
+    await loading.present();
+
+    this.proveedorOrganizadores.obtenerOrganizador(this.login)
+      .subscribe(
+        async (data) => {
+          this.organizador = data;
+
+          var fecha_alta = new Date(this.organizador.fecha_alta);
+
+          this.organizador.fecha_alta = fecha_alta.toLocaleDateString();
+
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+
+    this.proveedorOrganizadores.obtenerEventosDeOrganizador(this.login)
+      .subscribe(
+        async (data) => {
+          this.eventos = data;
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
 
 }

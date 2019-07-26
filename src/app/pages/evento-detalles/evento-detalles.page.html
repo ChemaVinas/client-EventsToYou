@@ -13,7 +13,7 @@
   <ion-card *ngIf="evento">
     <img src="../../../assets/img/concierto.jpg" />
     <ion-card-header>
-      <ion-card-subtitle>id: {{evento.id}}</ion-card-subtitle>
+      <ion-card-subtitle><ion-text color="myApp_color2">Organizado por <a routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text></ion-card-subtitle>
       <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
     </ion-card-header>
 

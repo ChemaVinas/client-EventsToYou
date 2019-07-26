@@ -17,10 +17,6 @@ const routes: Routes = [
         loadChildren: '../inicio/inicio.module#InicioPageModule'
       },
       {
-        path: 'listado-eventos',
-        loadChildren: '../listado-eventos/listado-eventos.module#ListadoEventosPageModule'
-      },
-      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'

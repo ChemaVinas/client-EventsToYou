@@ -11,29 +11,16 @@
 
 <ion-content>
 
-  <ion-text color="myApp_color2"><p>*Provisional: Se muestran todos los usuarios.*</p></ion-text>
-
-  <ion-list>
-    <ion-item routerLink="/miembro-detalles/{{miembro.login}}" *ngFor="let miembro of miembros">
-      <ion-avatar slot="start">
-        <img src="../../../assets/img/avatar_ejemplo.jpg">
-      </ion-avatar>
-      <ion-label text-wrap>
-        {{miembro.nombre}} - @{{miembro.login}}
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
   <ion-list>
     <ion-list-header>
-      Organizadores
+      <ion-text color="myApp_color2">Estos son todos los miembros que sigues</ion-text>
     </ion-list-header>
-    <ion-item routerLink="/organizador-detalles/{{organizador.login}}" *ngFor="let organizador of organizadores">
+    <ion-item routerLink="/miembro-detalles/{{amigo.login}}" *ngFor="let amigo of amigos">
       <ion-avatar slot="start">
         <img src="../../../assets/img/avatar_ejemplo.jpg">
       </ion-avatar>
       <ion-label text-wrap>
-        {{organizador.nombre}} - @{{organizador.login}}
+        {{amigo.nombre}} - @{{amigo.login}}
       </ion-label>
     </ion-item>
   </ion-list>

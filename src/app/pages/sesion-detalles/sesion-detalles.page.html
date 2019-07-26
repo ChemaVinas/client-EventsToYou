@@ -9,13 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="sesion">
+<ion-content>
 
   <ion-button color="myApp_color3" expand="block" shape="round">Apuntarse a la sesión <ion-icon slot="end"
       name="hand"></ion-icon>
   </ion-button>
 
-  <ion-list lines="inset">
+  <ion-list *ngIf="sesion" lines="inset">
     <ion-item>
       <ion-label>id de Sesión: {{sesion.id_sesion}}</ion-label>
     </ion-item>
@@ -43,7 +43,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar routerLink="/evento-detalles/{{sesion.id_evento}}" routerDirection="backward">
+  <ion-toolbar *ngIf="sesion" routerLink="/evento-detalles/{{sesion.id_evento}}" routerDirection="backward">
     <ion-title color="myApp_color6">Evento: {{sesion.titulo_evento}}</ion-title>
   </ion-toolbar>
 </ion-footer>

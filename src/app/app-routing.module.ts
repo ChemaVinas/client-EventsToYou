@@ -5,9 +5,6 @@ const routes: Routes = [
   { path: '',
     loadChildren: './pages/tabs/tabs.module#TabsPageModule'
   },
-  { path: 'listado-eventos',
-    loadChildren: './pages/listado-eventos/listado-eventos.module#ListadoEventosPageModule'
-  },
   { path: 'evento-detalles/:eventoId',
     loadChildren: './pages/evento-detalles/evento-detalles.module#EventoDetallesPageModule'
   },

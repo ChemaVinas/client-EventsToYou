@@ -21,4 +21,20 @@ export class ProveedorMiembrosService {
   obtenerMiembro(login){
     return this.http.get(this.REST_SERVICE_URI+'/'+login);
   }
+
+  obtenerMiembrosSeguidos(login){
+    return this.http.get(this.REST_SERVICE_URI+'/'+login+'/miembros_seguidos');
+  }
+
+  obtenerSesionesApuntadas(login){
+    return this.http.get(this.REST_SERVICE_URI+'/'+login+'/sesiones_apuntadas');
+  }
+
+  obtenerEventosGuardados(login){
+    return this.http.get(this.REST_SERVICE_URI+'/'+login+'/eventos_guardados');
+  }
+
+  obtenerValoracionesDeMiembro(login){
+    return this.http.get(this.REST_SERVICE_URI+'/'+login+'/valoraciones');
+  }
 }

@@ -18,8 +18,12 @@
       <ion-text color="myApp_color2">
         <h2>@{{miembro.login}}</h2>
         <hr>
-        <h4><ion-icon name="pin"></ion-icon> Ubicación: {{miembro.ubicacion}}</h4>
-        <h4><ion-icon name="calendar"></ion-icon> Fecha de alta: {{miembro.fecha_alta}}</h4>
+        <h4>
+          <ion-icon name="pin"></ion-icon> Ubicación: {{miembro.ubicacion}}
+        </h4>
+        <h4>
+          <ion-icon name="calendar"></ion-icon> Fecha de alta: {{miembro.fecha_alta}}
+        </h4>
       </ion-text>
     </ion-label>
   </ion-item>
@@ -29,13 +33,15 @@
   <ion-item *ngIf="miembro" lines="none">
     <ion-label text-wrap>
       <ion-text color="myApp_color6">
-        <h4><ion-icon name="book"></ion-icon> {{miembro.biografia}}</h4>
+        <h4>
+          <ion-icon name="book"></ion-icon> {{miembro.biografia}}
+        </h4>
       </ion-text>
     </ion-label>
   </ion-item>
 
-  <ion-segment (ionChange)="segmentChanged($event)" color="myApp_color3">
-    <ion-segment-button value="Apuntados">
+  <ion-segment (ionChange)="segmentoCambiado($event)" value="Apuntados" color="myApp_color3">
+    <ion-segment-button value="Apuntados" checked>
       <ion-icon name="hand"></ion-icon>
     </ion-segment-button>
     <ion-segment-button value="Guardados">
@@ -45,5 +51,69 @@
       <ion-icon name="star"></ion-icon>
     </ion-segment-button>
   </ion-segment>
+
+  <ion-list *ngIf="segmento == 'Apuntados'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Sesiones apuntadas</ion-text>
+    </ion-list-header>
+    <ion-card *ngFor="let sesion_apuntada of sesiones_apuntadas" routerLink="/sesion-detalles/{{sesion_apuntada.id}}">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-text color="myApp_color3">
+            <ion-icon name="pin"></ion-icon> {{sesion_apuntada.ciudad}}
+          </ion-text>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <ion-icon name="hand"></ion-icon> {{sesion_apuntada.evento_titulo}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text color="myApp_color2">Apuntado el {{sesion_apuntada.fecha}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="segmento == 'Guardados'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Eventos guardados</ion-text>
+    </ion-list-header>
+    <ion-card *ngFor="let evento_guardado of eventos_guardados" routerLink="/evento-detalles/{{evento_guardado.id}}">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-text color="myApp_color3">
+            Puntuación media: {{evento_guardado.valoracion_media}} <ion-icon name="star"></ion-icon>
+          </ion-text>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <ion-icon name="heart"></ion-icon> {{evento_guardado.titulo}}
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text color="myApp_color2">Guardado el {{evento_guardado.fecha}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-list *ngIf="segmento == 'Valoraciones'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Valoraciones enviadas</ion-text>
+    </ion-list-header>
+    <ion-card *ngFor="let valoracion of valoraciones" routerLink="/evento-detalles/{{valoracion.id_evento}}">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-text color="myApp_color3">
+            Puntuación dada: {{valoracion.puntuacion}} <ion-icon name="star"></ion-icon>
+          </ion-text>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <ion-icon name="star"></ion-icon> {{valoracion.titulo_evento}}: "{{valoracion.comentario}}"
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text color="myApp_color2">Enviado el {{valoracion.fecha}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
 
 </ion-content>

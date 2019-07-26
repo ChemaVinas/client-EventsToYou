@@ -21,4 +21,8 @@ export class ProveedorOrganizadoresService {
   obtenerOrganizador(login){
     return this.http.get(this.REST_SERVICE_URI+'/'+login);
   }
+
+  obtenerEventosDeOrganizador(login){
+    return this.http.get(this.REST_SERVICE_URI+'/'+login+'/eventos');
+  }
 }

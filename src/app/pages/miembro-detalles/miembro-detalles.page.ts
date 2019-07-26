@@ -11,47 +11,167 @@ import { ActivatedRoute } from '@angular/router';
 export class MiembroDetallesPage implements OnInit {
 
   miembro;
+  eventos_guardados: any;
+  sesiones_apuntadas: any;
+  valoraciones: any;
   login: any;
+  segmento;
 
   constructor(
     public navCtrl: NavController,
     public proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {
-      //Obtenemos el login del miembro como parámetro
-      this.login = this.activatedRoute.snapshot.paramMap.get('login');
-    }
+    //Obtenemos el login del miembro como parámetro
+    this.login = this.activatedRoute.snapshot.paramMap.get('login');
+  }
 
-    async ngOnInit() {
+  async ngOnInit() {
 
-      console.log('ngOnInit miembro-detalles page');
-  
-      const loading = await this.loadingCtrl.create({
-        message: 'Cargando..',
-      });
-  
-      await loading.present();
-  
-      this.proveedorMiembros.obtenerMiembro(this.login)
-        .subscribe(
-          async (data) => {
-            this.miembro = data;
+    console.log('ngOnInit miembro-detalles page');
 
-            var fecha_alta = new Date(this.miembro.fecha_alta);
-          
-            this.miembro.fecha_alta = fecha_alta.toLocaleDateString();
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
 
-            await loading.dismiss();
-          },
-          (error) => {
-            console.log(error);
-            loading.dismiss();
+    await loading.present();
+
+    this.proveedorMiembros.obtenerMiembro(this.login)
+      .subscribe(
+        async (data) => {
+          this.miembro = data;
+
+          var fecha_alta = new Date(this.miembro.fecha_alta);
+
+          this.miembro.fecha_alta = fecha_alta.toLocaleDateString();
+
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+
+    this.segmento = "Apuntados";
+    this.getSesionesApuntadas();
+
+  }
+
+  async getSesionesApuntadas() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorMiembros.obtenerSesionesApuntadas(this.login)
+      .subscribe(
+        async (data) => {
+          this.sesiones_apuntadas = data;
+
+          if (this.sesiones_apuntadas != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let sesion_apuntada of this.sesiones_apuntadas) {
+              var fecha_sesion_apuntada = new Date(sesion_apuntada.fecha);
+
+              var fecha = fecha_sesion_apuntada.toLocaleDateString();
+              var hora = fecha_sesion_apuntada.toLocaleTimeString();
+              sesion_apuntada.fecha = fecha + " - " + hora;
+            }
           }
-        );
-    }
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
 
-    segmentChanged(ev: any) {
-      console.log('Segment changed', ev);
+  async getEventosGuardados() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorMiembros.obtenerEventosGuardados(this.login)
+      .subscribe(
+        async (data) => {
+          this.eventos_guardados = data;
+
+          if (this.eventos_guardados != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let evento_guardado of this.eventos_guardados) {
+              var fecha_evento_guardado = new Date(evento_guardado.fecha);
+
+              var fecha = fecha_evento_guardado.toLocaleDateString();
+              var hora = fecha_evento_guardado.toLocaleTimeString();
+              evento_guardado.fecha = fecha + " - " + hora;
+            }
+          }
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
+
+  async getValoraciones() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorMiembros.obtenerValoracionesDeMiembro(this.login)
+      .subscribe(
+        async (data) => {
+          this.valoraciones = data;
+
+          if (this.valoraciones != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let valoracion of this.valoraciones) {
+              var fecha_valoracion = new Date(valoracion.fecha);
+
+              var fecha = fecha_valoracion.toLocaleDateString();
+              var hora = fecha_valoracion.toLocaleTimeString();
+              valoracion.fecha = fecha + " - " + hora;
+            }
+          }
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
+
+  segmentoCambiado(ev: any) {
+    this.segmento = ev.detail.value;
+
+    switch (this.segmento) {
+      case "Apuntados": {
+        this.getSesionesApuntadas();
+        break;
+      }
+      case "Guardados": {
+        this.getEventosGuardados();
+        break;
+      }
+      case "Valoraciones": {
+        this.getValoraciones();
+        break;
+      }
+      default: {
+        console.log("Segmento inválido");
+        break;
+      }
     }
+  }
 
 }

@@ -10,8 +10,7 @@ import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organ
 })
 export class ListadoAmigosPage implements OnInit {
 
-  miembros;
-  organizadores; //< Provisional
+  amigos;
 
   constructor(
     public navCtrl: NavController,
@@ -29,23 +28,10 @@ export class ListadoAmigosPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorMiembros.obtenerMiembros()
+    this.proveedorMiembros.obtenerMiembrosSeguidos('login_usuario1')
       .subscribe(
         async (data) => {
-          this.miembros = data;
-          await loading.dismiss();
-        },
-        (error) => {
-          console.log(error);
-          loading.dismiss();
-        }
-      );
-
-    //Provisional
-    this.proveedorOrganizadores.obtenerOrganizadores()
-      .subscribe(
-        async (data) => {
-          this.organizadores = data;
+          this.amigos = data;
           await loading.dismiss();
         },
         (error) => {

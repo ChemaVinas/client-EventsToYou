@@ -40,7 +40,7 @@ export class EventoDetallesPage implements OnInit {
       .subscribe(
         async (data) => {
           this.evento = data;
-          //await loading.dismiss();
+          await loading.dismiss();
         },
         (error) => {
           console.log(error);
@@ -53,16 +53,18 @@ export class EventoDetallesPage implements OnInit {
         async (data) => {
           this.valoraciones = data;
 
-          //Convertimos la fecha y almacenamos la hora
-          for (let valoracion of this.valoraciones) {
-            var fecha_sesion = new Date(valoracion.fecha);
+          if (this.valoraciones != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let valoracion of this.valoraciones) {
+              var fecha_sesion = new Date(valoracion.fecha);
 
-            var fecha = fecha_sesion.toLocaleDateString();
-            var hora = fecha_sesion.toLocaleTimeString();
-            valoracion.fecha = fecha + " - " + hora;
+              var fecha = fecha_sesion.toLocaleDateString();
+              var hora = fecha_sesion.toLocaleTimeString();
+              valoracion.fecha = fecha + " - " + hora;
+            }
           }
 
-          //await loading.dismiss();
+          await loading.dismiss();
         },
         (error) => {
           console.log(error);
