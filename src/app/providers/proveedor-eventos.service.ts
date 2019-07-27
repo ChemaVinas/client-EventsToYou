@@ -18,6 +18,14 @@ export class ProveedorEventosService {
     return this.http.get(this.REST_SERVICE_URI);
   }
 
+  obtenerCategorias(){
+    return this.http.get(this.REST_SERVICE_URI+'/categorias');
+  }
+
+  obtenerEventosCategoria(categoria){
+    return this.http.get(this.REST_SERVICE_URI+'/categorias/'+categoria);
+  }
+
   obtenerEvento(id){
     return this.http.get(this.REST_SERVICE_URI+'/'+id);
   }

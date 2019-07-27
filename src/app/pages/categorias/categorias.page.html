@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Categorias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let categoria of categorias" (click)="presentModalCategoria(categoria)">
+    <ion-label color="myApp_color6">
+      {{categoria}}
+    </ion-label>
+  </ion-item>
+
+</ion-content>

@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: '../ultima-actividad/ultima-actividad.module#UltimaActividadPageModule'
       },
       {
+        path: 'categorias',
+        loadChildren: '../categorias/categorias.module#CategoriasPageModule'
+      },
+      {
         path: '',
         redirectTo: '/tabs/inicio',
         pathMatch: 'full'

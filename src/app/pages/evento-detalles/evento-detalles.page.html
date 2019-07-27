@@ -13,14 +13,29 @@
   <ion-card *ngIf="evento">
     <img src="../../../assets/img/concierto.jpg" />
     <ion-card-header>
-      <ion-card-subtitle><ion-text color="myApp_color2">Organizado por <a routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text></ion-card-subtitle>
+      <ion-card-subtitle class="align-right">
+        <ion-text color="myApp_color2">Organizado por <a
+            routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text>
+      </ion-card-subtitle>
       <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <div><strong>Descripción: </strong>{{evento.descripcion}}</div>
-      <div><strong>Web: </strong>{{evento.web_entradas}}</div>
-      <div><strong>Valoración media: </strong>{{evento.valoracion_media}}</div>
+      <div>
+        <ion-text color="myApp_color3">
+          Puntuación media: <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+        </ion-text>
+      </div>
+      <div>Web: <a href="">{{evento.web_entradas}}</a></div>
+      <div>{{evento.descripcion}}</div>
+
+      <div class="align-right">
+        <ion-chip>
+          <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
+          <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
+        </ion-chip>
+      </div>
+
     </ion-card-content>
   </ion-card>
 
@@ -30,7 +45,9 @@
       <ion-card routerLink="/sesion-detalles/{{sesion.id_sesion}}">
         <ion-card-header>
           <ion-card-title>{{sesion.fecha}}</ion-card-title>
-          <ion-card-subtitle color="myApp_color3"><ion-icon name="pin"></ion-icon> {{sesion.ciudad}}</ion-card-subtitle>
+          <ion-card-subtitle color="myApp_color3">
+            <ion-icon name="pin"></ion-icon> {{sesion.ciudad}}
+          </ion-card-subtitle>
         </ion-card-header>
       </ion-card>
       <ion-icon *ngIf="sesion != sesiones[sesiones.length - 1]" size="large" color="myApp_color1"
@@ -49,12 +66,16 @@
           <img src="../../../assets/img/avatar_ejemplo2.jpg">
         </ion-avatar>
         <ion-label text-wrap>
-          <ion-text color="myApp_color3"><h2><ion-icon color="myApp_color3" name="star"></ion-icon> Tu valoración</h2></ion-text>
+          <ion-text color="myApp_color3">
+            <h2>
+              <ion-icon color="myApp_color3" name="star"></ion-icon> Tu valoración
+            </h2>
+          </ion-text>
         </ion-label>
         <ion-button color="myApp_color3" slot="end" type="submit">Enviar</ion-button>
       </ion-item>
 
-    
+
       <ion-item color="myApp_color4" lines="none">
         <ion-text color="myApp_color3">Puntuación: </ion-text>
         <ion-select>
@@ -80,12 +101,12 @@
           <ion-select-option value="10">10</ion-select-option>
         </ion-select>
       </ion-item>
-      
+
       <ion-item color="myApp_color4">
         <ion-label color="myApp_color3" position="stacked">Comentario:</ion-label>
         <ion-input required type="text" oninput=""></ion-input>
       </ion-item>
-      
+
     </form>
 
     <ion-item *ngFor="let valoracion of valoraciones" lines="full">
@@ -96,19 +117,27 @@
 
         <ion-text color="myApp_color2"><small>{{valoracion.fecha}}</small></ion-text>
 
-        <ion-text color="myApp_color3"><h2><strong><ion-icon color="myApp_color3" name="star"></ion-icon> {{valoracion.puntuacion}}</strong></h2></ion-text>
+        <ion-text color="myApp_color3">
+          <h2><strong>
+              <ion-icon color="myApp_color3" name="star"></ion-icon> {{valoracion.puntuacion}}
+            </strong></h2>
+        </ion-text>
 
-        <ion-text color="myApp_color6"><h3>Nombre de miembro</h3></ion-text>
+        <ion-text color="myApp_color6">
+          <h3>Nombre de miembro</h3>
+        </ion-text>
 
-        <ion-text color="white"><p>{{valoracion.comentario}}</p></ion-text>
-        
+        <ion-text color="white">
+          <p>{{valoracion.comentario}}</p>
+        </ion-text>
+
         <ion-button color="myApp_color3" shape="round" fill="outline">
           <ion-icon slot="start" name="thumbs-down"></ion-icon>
-           {{valoracion.votos_negativos}}
+          {{valoracion.votos_negativos}}
         </ion-button>
 
         <ion-button color="myApp_color3" shape="round" fill="outline">
-          {{valoracion.votos_positivos}} 
+          {{valoracion.votos_positivos}}
           <ion-icon slot="end" name="thumbs-up"></ion-icon>
         </ion-button>
 
