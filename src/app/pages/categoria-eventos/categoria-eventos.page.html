@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="dismiss()">Volver</ion-button>
+      <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
-
-    <ion-title color="myApp_color6">
+    <ion-title>
       {{categoria}}
     </ion-title>
   </ion-toolbar>
@@ -17,7 +16,7 @@
       <img src="../../../assets/img/concierto.jpg" />
       <ion-card-header>
         <ion-card-subtitle class="align-right">
-          <ion-text color="myApp_color2">Organizado por <a (click)="dismiss()"
+          <ion-text color="myApp_color2">Organizado por <a
               routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a>
           </ion-text>
         </ion-card-subtitle>
@@ -37,7 +36,7 @@
           <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
           <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
         </ion-chip>
-        <ion-button (click)="dismiss()" fill="clear" size="small" color="myApp_color2" slot="end"
+        <ion-button fill="clear" size="small" color="myApp_color2" slot="end"
           routerLink="/evento-detalles/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
         <!--<ion-button slot="start" (click)="eventoTapped($event, evento)">Ver (event onclick)</ion-button>-->
       </ion-item>

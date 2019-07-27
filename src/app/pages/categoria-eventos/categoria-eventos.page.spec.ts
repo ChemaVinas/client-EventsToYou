@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoriaModalComponent } from './categoria-modal.component';
+import { CategoriaEventosPage } from './categoria-eventos.page';
 
-describe('CategoriaModalComponent', () => {
-  let component: CategoriaModalComponent;
-  let fixture: ComponentFixture<CategoriaModalComponent>;
+describe('CategoriaEventosPage', () => {
+  let component: CategoriaEventosPage;
+  let fixture: ComponentFixture<CategoriaEventosPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoriaModalComponent ],
+      declarations: [ CategoriaEventosPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoriaModalComponent);
+    fixture = TestBed.createComponent(CategoriaEventosPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

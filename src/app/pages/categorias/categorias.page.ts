@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, ModalController } from '@ionic/angular';
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
-import { CategoriaModalComponent } from 'src/app/components/categoria-modal/categoria-modal.component';
 
 @Component({
   selector: 'app-categorias',
@@ -40,14 +39,6 @@ export class CategoriasPage implements OnInit {
         }
       );
 
-  }
-
-  async presentModalCategoria(categoria) {
-    const modal = await this.modalController.create({
-      component: CategoriaModalComponent,
-      componentProps: { categoria: categoria}
-    });
-    return await modal.present();
   }
 
 

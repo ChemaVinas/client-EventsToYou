@@ -19,7 +19,8 @@ const routes: Routes = [
   },
   { path: 'organizador-detalles/:login',
     loadChildren: './pages/organizador-detalles/organizador-detalles.module#OrganizadorDetallesPageModule'
-  }
+  },
+  { path: 'categoria-eventos/:categoria', loadChildren: './pages/categoria-eventos/categoria-eventos.module#CategoriaEventosPageModule' }
   /*{
     path: '',
     redirectTo: '/app/tabs/home',

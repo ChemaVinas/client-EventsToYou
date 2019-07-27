@@ -11,7 +11,7 @@
 
 <ion-content>
 
-  <ion-item *ngFor="let categoria of categorias" (click)="presentModalCategoria(categoria)">
+  <ion-item *ngFor="let categoria of categorias" routerLink="/categoria-eventos/{{categoria}}">
     <ion-label color="myApp_color6">
       {{categoria}}
     </ion-label>
