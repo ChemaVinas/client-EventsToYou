@@ -35,9 +35,9 @@
 
     <ion-card *ngFor="let sesion_apuntada of sesiones_apuntadas">
       <ion-item routerLink="/miembro-detalles/{{sesion_apuntada.login_miembro}}" color="myApp_color4" lines="none">
-        <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
-          <ion-text color="myApp_color2">
+          <ion-text color="myApp_color6">
             <h2><strong>{{sesion_apuntada.nombre_miembro}}</strong></h2>
           </ion-text>
         </ion-label>
@@ -60,9 +60,9 @@
 
     <ion-card *ngFor="let evento_guardado of eventos_guardados">
       <ion-item routerLink="/miembro-detalles/{{evento_guardado.login_miembro}}" color="myApp_color4" lines="none">
-        <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
-          <ion-text color="myApp_color2">
+          <ion-text color="myApp_color6">
             <h2><strong>{{evento_guardado.nombre_miembro}}</strong></h2>
           </ion-text>
         </ion-label>
@@ -84,9 +84,9 @@
 
     <ion-card *ngFor="let valoracion of valoraciones">
       <ion-item routerLink="/miembro-detalles/{{valoracion.login_miembro}}" color="myApp_color4" lines="none">
-        <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
-          <ion-text color="myApp_color2">
+          <ion-text color="myApp_color6">
             <h2><strong>{{valoracion.nombre_miembro}}</strong></h2>
           </ion-text>
         </ion-label>

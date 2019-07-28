@@ -13,7 +13,7 @@
 
   <ion-list>
     <ion-card *ngFor="let evento of eventos">
-      <img src="../../../assets/img/concierto.jpg" />
+      <img class="imagen" [src]="'data:image/JPEG;base64,' + evento.imagen" />
       <ion-card-header>
         <ion-card-subtitle class="align-right">
           <ion-text color="myApp_color2">Organizado por <a

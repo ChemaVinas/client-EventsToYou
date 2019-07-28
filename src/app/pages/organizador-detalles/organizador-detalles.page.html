@@ -12,7 +12,7 @@
 <ion-content>
 
   <ion-item *ngIf="organizador" lines="none">
-    <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+    <img class="avatar_perfil" [src]="'data:image/JPEG;base64,' + organizador.avatar" />
     <ion-label text-wrap>
       <h1>{{organizador.nombre}}</h1>
       <ion-text color="myApp_color2">
@@ -43,7 +43,7 @@
       Eventos organizados:
     </ion-list-header>
     <ion-card *ngFor="let evento of eventos">
-      <img src="../../../assets/img/concierto.jpg" />
+      <img class="imagen" [src]="'data:image/JPEG;base64,' + evento.imagen" />
       <ion-card-header>
         <ion-card-subtitle>
           <ion-text color="myApp_color3">

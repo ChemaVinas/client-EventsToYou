@@ -19,7 +19,7 @@
   <ion-list>
     <ion-item routerLink="/miembro-detalles/{{amigo.login}}" *ngFor="let amigo of amigos">
       <ion-avatar slot="start">
-        <img src="../../../assets/img/avatar_ejemplo.jpg">
+        <img [src]="'data:image/JPEG;base64,' + amigo.avatar" />
       </ion-avatar>
       <ion-label text-wrap>
         {{amigo.nombre}} - @{{amigo.login}}

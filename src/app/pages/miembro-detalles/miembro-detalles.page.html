@@ -12,7 +12,7 @@
 <ion-content>
 
   <ion-item *ngIf="miembro" lines="none">
-    <img class="avatar_perfil" src="../../../assets/img/avatar_ejemplo.jpg">
+    <img class="avatar_perfil" [src]="'data:image/JPEG;base64,' + miembro.avatar" />
     <ion-label text-wrap>
       <h1>{{miembro.nombre}}</h1>
       <ion-text color="myApp_color2">
