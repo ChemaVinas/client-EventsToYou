@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="nuevoEvento">Crear evento</ion-title>
+    <ion-title *ngIf="!nuevoEvento">Actualizar evento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <!--<h3>Basado en el form de template-conference</h3>-->
+
+    <form #formularioEvento="ngForm">
+      <ion-list>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Título  
+              <ion-text [hidden]="titulo.valid || submitted == false" color="danger">
+                  *Campo obligatorio
+              </ion-text>
+          </ion-label>
+          <ion-input [(ngModel)]="evento.titulo" name="titulo" type="text" placeholder="Título de evento" #titulo="ngModel" required>
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked" color="primary">Descripción  
+              <ion-text [hidden]="descripcion.valid || submitted == false" color="danger">
+                  *Campo obligatorio
+              </ion-text>
+          </ion-label>
+          <ion-textarea [(ngModel)]="evento.descripcion" name="descripcion" type="text" placeholder="Descripción de evento" #descripcion="ngModel" required>
+          </ion-textarea>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked" color="primary">Categoría  
+              <ion-text [hidden]="categoria.valid || submitted == false" color="danger">
+                  *
+              </ion-text>
+          </ion-label>
+          <ion-select [(ngModel)]="evento.categoria" name="categoria" cancelText="Atrás" okText="Aceptar" #categoria="ngModel" required>
+            <ion-select-option *ngFor="let categoria of categorias" value="{{categoria}}">
+              {{categoria}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked" color="primary">Web de entradas</ion-label>
+          <ion-input [(ngModel)]="evento.web_entradas" name="web_entradas" type="text" placeholder="www.entradas.com (opcional)" #web_entradas="ngModel">
+          </ion-input>
+        </ion-item>
+  
+      </ion-list>
+  
+      <div class="ion-padding">
+        <ion-button (click)="onGuardarEvento(formularioEvento)" type="submit" expand="block">Guardar evento</ion-button>
+      </div>
+    </form>
+
+  <!--<form [formGroup]="eventoForm" (ngSubmit)="eventoOnSubmit()">
+
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+      <ion-item>
+        <ion-label position="stacked">Título</ion-label>
+        <ion-input required formControlName="titulo" type="text" placeholder="Título de evento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea required formControlName="descripcion" placeholder="Descripción de evento"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Categoría</ion-label>
+        <ion-select required formControlName="categoria" cancelText="Atrás" okText="Aceptar">
+          <ion-select-option *ngFor="let categoria of categorias" value="{{categoria}}">
+            {{categoria}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Web de Entradas (opcional)</ion-label>
+        <ion-input formControlName="web" type="url" placeholder="www.entradas-evento.com"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Guardar Evento
+      </ion-button>
+    </div>
+
+  </form>-->
+
+</ion-content>

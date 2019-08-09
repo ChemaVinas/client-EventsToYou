@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Evento } from '../interfaces/evento';
+import { Sesion } from '../interfaces/sesion';
+import { Valoracion } from '../interfaces/valoracion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorEventosService {
-
-  data: any;
 
   REST_SERVICE_URI = 'http://localhost:8080/EventsToYou/eventos';
 
@@ -15,7 +16,7 @@ export class ProveedorEventosService {
   }
 
   obtenerEventos(){
-    return this.http.get(this.REST_SERVICE_URI);
+    return this.http.get<Evento[]>(this.REST_SERVICE_URI);
   }
 
   obtenerCategorias(){
@@ -23,19 +24,23 @@ export class ProveedorEventosService {
   }
 
   obtenerEventosCategoria(categoria){
-    return this.http.get(this.REST_SERVICE_URI+'/categorias/'+categoria);
+    return this.http.get<Evento[]>(this.REST_SERVICE_URI+'/categorias/'+categoria);
   }
 
   obtenerEvento(id){
-    return this.http.get(this.REST_SERVICE_URI+'/'+id);
+    return this.http.get<Evento>(this.REST_SERVICE_URI+'/'+id);
   }
 
   obtenerSesionesEvento(id){
-    return this.http.get(this.REST_SERVICE_URI+'/'+id+'/sesiones');
+    return this.http.get<Sesion[]>(this.REST_SERVICE_URI+'/'+id+'/sesiones');
+  }
+
+  obtenerSesionEvento(id_evento, id_sesion){
+    return this.http.get<Sesion>(this.REST_SERVICE_URI+'/'+id_evento+'/sesiones/'+id_sesion);
   }
 
   obtenerValoracionesEvento(id){
-    return this.http.get(this.REST_SERVICE_URI+'/'+id+'/valoraciones');
+    return this.http.get<Valoracion[]>(this.REST_SERVICE_URI+'/'+id+'/valoraciones');
   }
 
 }

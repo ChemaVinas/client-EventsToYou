@@ -3,24 +3,35 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '',
-    loadChildren: './pages/tabs/tabs.module#TabsPageModule'
+    loadChildren: './pages/miembros/tabs/tabs.module#TabsPageModule'
   },
   { path: 'evento-detalles/:eventoId',
-    loadChildren: './pages/evento-detalles/evento-detalles.module#EventoDetallesPageModule'
+    loadChildren: './pages/miembros/evento-detalles/evento-detalles.module#EventoDetallesPageModule'
   },
-  { path: 'sesion-detalles/:sesionId',
-    loadChildren: './pages/sesion-detalles/sesion-detalles.module#SesionDetallesPageModule'
+  { path: 'evento-detalles/:eventoId/sesion-detalles/:sesionId',
+    loadChildren: './pages/miembros/sesion-detalles/sesion-detalles.module#SesionDetallesPageModule'
   },
   { path: 'listado-amigos',
-    loadChildren: './pages/listado-amigos/listado-amigos.module#ListadoAmigosPageModule'
+    loadChildren: './pages/miembros/listado-amigos/listado-amigos.module#ListadoAmigosPageModule'
   },
   { path: 'miembro-detalles/:login',
-    loadChildren: './pages/miembro-detalles/miembro-detalles.module#MiembroDetallesPageModule'
+    loadChildren: './pages/miembros/miembro-detalles/miembro-detalles.module#MiembroDetallesPageModule'
   },
   { path: 'organizador-detalles/:login',
-    loadChildren: './pages/organizador-detalles/organizador-detalles.module#OrganizadorDetallesPageModule'
+    loadChildren: './pages/miembros/organizador-detalles/organizador-detalles.module#OrganizadorDetallesPageModule'
   },
-  { path: 'categoria-eventos/:categoria', loadChildren: './pages/categoria-eventos/categoria-eventos.module#CategoriaEventosPageModule' }
+  { path: 'categoria-eventos/:categoria',
+    loadChildren: './pages/miembros/categoria-eventos/categoria-eventos.module#CategoriaEventosPageModule'
+  },
+  { path: 'organizador-perfil/:login',
+    loadChildren: './pages/organizadores/organizador-perfil/organizador-perfil.module#OrganizadorPerfilPageModule'
+  },
+  { path: 'evento-organizado/:eventoId',
+    loadChildren: './pages/organizadores/evento-organizado/evento-organizado.module#EventoOrganizadoPageModule'
+  },
+  { path: 'evento-organizado/:eventoId/sesion-organizada/:sesionId',
+    loadChildren: './pages/organizadores/sesion-organizada/sesion-organizada.module#SesionOrganizadaPageModule'
+  }
   /*{
     path: '',
     redirectTo: '/app/tabs/home',

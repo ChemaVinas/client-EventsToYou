@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Evento
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="evento">
+  <ion-card>
+    <img [src]="'data:image/JPEG;base64,' + evento.imagen" />
+    <ion-card-header>
+      <ion-card-subtitle class="align-right">
+        <ion-text color="myApp_color2">Organizado por <a
+            routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text>
+      </ion-card-subtitle>
+      <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        <div>
+          Puntuación media:  
+          <ion-text color="myApp_color3">
+            <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+          </ion-text>
+        </div>
+      <div>Web: <a href="">{{evento.web_entradas}}</a></div>
+      <div>{{evento.descripcion}}</div>
+
+      <div class="align-right">
+        <ion-chip>
+          <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
+          <ion-label color="myApp_color3" routerLink="/categoria-eventos/{{evento.categoria}}">{{evento.categoria}}
+          </ion-label>
+        </ion-chip>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide *ngFor="let sesion of sesiones">
+      <ion-icon *ngIf="sesion != sesiones[0]" size="large" color="myApp_color1" name="arrow-dropleft"></ion-icon>
+      <ion-card routerLink="/evento-detalles/{{evento.id}}/sesion-detalles/{{sesion.id_sesion}}">
+        <ion-card-header>
+          <ion-card-title>{{sesion.fechaString}}</ion-card-title>
+          <ion-card-subtitle color="myApp_color3">
+            <ion-icon name="pin"></ion-icon> {{sesion.ciudad}}
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-icon *ngIf="sesion != sesiones[sesiones.length - 1]" size="large" color="myApp_color1"
+        name="arrow-dropright"></ion-icon>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-list>
+    <ion-list-header color="myApp_color1">
+      Valoraciones
+    </ion-list-header>
+
+    <form onsubmit="">
+      <ion-item color="myApp_color4" lines="none">
+        <ion-label text-wrap>
+          <ion-text>
+            <h2>
+              <ion-icon name="star"></ion-icon> Tu valoración
+            </h2>
+          </ion-text>
+        </ion-label>
+        <ion-button color="myApp_color3" slot="end" type="submit">Enviar</ion-button>
+      </ion-item>
+
+
+      <ion-item color="myApp_color4" lines="none">
+        <ion-text color="myApp_color3">Puntuación: </ion-text>
+        <ion-select>
+          <ion-select-option value="0.5">0.5</ion-select-option>
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="1.5">1.5</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="2.5">2.5</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="3.5">3.5</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="4.5">4.5</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+          <ion-select-option value="5.5">5.5</ion-select-option>
+          <ion-select-option value="6">6</ion-select-option>
+          <ion-select-option value="6.5">6.5</ion-select-option>
+          <ion-select-option value="7">7</ion-select-option>
+          <ion-select-option value="7.5">7.5</ion-select-option>
+          <ion-select-option value="8">8</ion-select-option>
+          <ion-select-option value="8.5">8.5</ion-select-option>
+          <ion-select-option value="9">9</ion-select-option>
+          <ion-select-option value="9.5">9.5</ion-select-option>
+          <ion-select-option value="10">10</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item color="myApp_color4">
+        <ion-label color="myApp_color3" position="stacked">Comentario:</ion-label>
+        <ion-input required type="text" oninput=""></ion-input>
+      </ion-item>
+
+    </form>
+
+    <ion-item *ngFor="let valoracion of valoraciones" lines="full">
+      <ion-label text-wrap>
+
+        <ion-text color="myApp_color2"><small>{{valoracion.fechaString}}</small></ion-text>
+
+        <ion-text color="myApp_color3" class="align-right">
+          <h2>
+            <strong>
+              <ion-icon color="myApp_color3" name="star"></ion-icon> {{valoracion.puntuacion}}
+            </strong>
+          </h2>
+        </ion-text>
+
+        <ion-text color="myApp_color3">
+          <a routerLink="/miembro-detalles/{{valoracion.login_miembro}}">{{valoracion.nombre_miembro}}</a>:
+        </ion-text>
+
+        <ion-text color="white">
+          "{{valoracion.comentario}}"
+        </ion-text>
+
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

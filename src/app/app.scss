@@ -5,4 +5,39 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
 
-a { color: #a41df2; }
+a {
+    color: #a41df2;
+}
+
+.alert-radio-label {
+    color: white !important;
+}
+
+.alert-radio-inner {
+    background-color: #a41df2 !important;
+}
+
+.alert-radio-icon {
+    border-color: #a41df2 !important;
+}
+
+.alert-button-inner {
+    color: #a41df2 !important;
+}
+
+.alert-message {
+    color: white !important;;
+}
+
+.alert-title {
+    color: #a41df2 !important;;
+}
+
+ion-item {
+    --highlight-color-focused: #a41df2 !important;
+    --highlight-color-valid: #a41df2 !important;
+}
+
+ion-toast {
+    --background: #a41df2 !important;
+}

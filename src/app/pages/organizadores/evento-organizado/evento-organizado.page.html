@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Evento
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="evento">
+  <ion-card>
+    <img [src]="'data:image/JPEG;base64,' + evento.imagen" />
+    <ion-card-header>
+      <ion-card-subtitle class="align-right">
+        <ion-text color="myApp_color2">Organizado por {{evento.nombre_organizador}}</ion-text>
+      </ion-card-subtitle>
+      <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div>
+        Puntuación media:
+        <ion-text color="myApp_color3">
+          <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+        </ion-text>
+      </div>
+      <div>Web: <a href="">{{evento.web_entradas}}</a></div>
+      <div>{{evento.descripcion}}</div>
+
+      <div class="align-right">
+        <ion-chip>
+          <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
+          <ion-label color="myApp_color3">{{evento.categoria}}
+          </ion-label>
+        </ion-chip>
+      </div>
+
+      <ion-button (click)="presentGuardarEventoModalForm()" shape="round" size="full">Editar</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Crear nueva sesión</ion-card-title>
+          <ion-button (click)="presentCrearSesionModalForm()" size="small" fill="clear">
+            <ion-icon name="add-circle"></ion-icon>
+          </ion-button>
+        </ion-card-header>
+      </ion-card>
+      <ion-icon size="large" color="myApp_color1" name="arrow-dropright"></ion-icon>
+    </ion-slide>
+
+    <ion-slide *ngFor="let sesion of sesiones">
+      <ion-icon size="large" color="myApp_color1" name="arrow-dropleft"></ion-icon>
+      <ion-card routerLink="/evento-organizado/{{evento.id}}/sesion-organizada/{{sesion.id_sesion}}">
+        <ion-card-header>
+          <ion-card-title>{{sesion.fechaString}}</ion-card-title>
+          <ion-card-subtitle color="myApp_color3">
+            <ion-icon name="pin"></ion-icon> {{sesion.ciudad}}
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-icon *ngIf="sesion != sesiones[sesiones.length - 1]" size="large" color="myApp_color1"
+        name="arrow-dropright"></ion-icon>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-list>
+    <ion-list-header color="myApp_color1">
+      Valoraciones de miembros
+    </ion-list-header>
+
+    <ion-item *ngFor="let valoracion of valoraciones" lines="full">
+      <ion-label text-wrap>
+
+        <ion-text color="myApp_color2"><small>{{valoracion.fechaString}}</small></ion-text>
+
+        <ion-text color="myApp_color3" class="align-right">
+          <h2>
+            <strong>
+              <ion-icon color="myApp_color3" name="star"></ion-icon> {{valoracion.puntuacion}}
+            </strong>
+          </h2>
+        </ion-text>
+
+        <ion-text color="myApp_color3">
+          {{valoracion.nombre_miembro}}:
+        </ion-text>
+
+        <ion-text color="white">
+          "{{valoracion.comentario}}"
+        </ion-text>
+
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="align-right">
+    <ion-button (click)="presentAlertDeleteConfirm()" color="danger" fill="outline" shape="round" size="small">Eliminar
+      evento</ion-button>
+  </div>
+
+</ion-content>

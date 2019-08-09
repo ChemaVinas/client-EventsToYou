@@ -12,13 +12,18 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Perfil',
-      url: '/miembro-detalles/login_usuario1',
+      url: '/miembro-detalles/login_miembro1',
       icon: 'person'
     },
     {
       title: 'Amigos',
       url: '/listado-amigos',
       icon: 'people'
+    },
+    {
+      title: 'Organizador',
+      url: '/organizador-perfil/login_organizador1',
+      icon: 'alert'
     }
   ];
 

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Sesion
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngIf="sesion" lines="inset">
+
+    <ion-item>
+      <ion-icon color="myApp_color3" name="calendar" slot="start"></ion-icon>
+      <ion-label>{{sesion.fechaString}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon color="myApp_color3" name="time" slot="start"></ion-icon>
+      <ion-label>{{sesion.horaString}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon color="myApp_color3" name="pin" slot="start"></ion-icon>
+      <ion-label>{{sesion.ciudad}}. {{sesion.direccion}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item lines="none">
+    <ion-img class="imagen-mapa" src="../../../assets/img/mapa_ejemplo.PNG"></ion-img>
+  </ion-item>
+
+  <div class="align-right">
+    <ion-button (click)="presentAlertDeleteConfirm()" color="danger" fill="outline" shape="round" size="small">Eliminar sesión</ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar *ngIf="sesion" routerLink="/evento-organizado/{{sesion.id_evento}}" routerDirection="backward">
+    <ion-title color="myApp_color6">Evento: {{sesion.titulo_evento}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

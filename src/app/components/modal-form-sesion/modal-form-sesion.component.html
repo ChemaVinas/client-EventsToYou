@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear sesión</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="full">
+    <ion-label text-wrap>
+      <ion-text color="myApp_color2">Nueva sesión para el evento: {{titulo_evento}}</ion-text>
+    </ion-label>
+  </ion-item>
+
+  <form #formularioSesion="ngForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Ciudad
+          <ion-text [hidden]="ciudad.valid || submitted == false" color="danger">
+            *Campo obligatorio
+          </ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="sesion.ciudad" name="ciudad" type="text" placeholder="Ciudad de la sesión"
+          #ciudad="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Dirección
+          <ion-text [hidden]="direccion.valid || submitted == false" color="danger">
+            *Campo obligatorio
+          </ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="sesion.direccion" name="direccion" type="text" placeholder="Direccion de la sesión"
+          #direccion="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Día/Mes/Año</ion-label>
+        <ion-datetime [(ngModel)]="fecha_sesion" name="fecha_sesion" displayFormat="DD/MM/YYYY" min="{{fecha_min}}"
+          max="{{fecha_max}}" placeholder="Selecciona la fecha" required></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Hora local</ion-label>
+        <ion-datetime [(ngModel)]="hora_sesion" name="hora_sesion" displayFormat="HH:mm"
+          placeholder="Selecciona la hora" required></ion-datetime>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button (click)="onGuardarSesion(formularioSesion)" type="submit" expand="block">Guardar sesion</ion-button>
+    </div>
+  </form>
+
+</ion-content>

@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Última actividad
+    </ion-title>
+  </ion-toolbar>
+  <ion-item lines="full">
+    <ion-label>
+      <ion-text color="myApp_color2">Última actividad de los miembros que sigues</ion-text>
+    </ion-label>
+  </ion-item>
+  <ion-segment (ionChange)="segmentoCambiado($event)" value="Apuntados" color="myApp_color3">
+    <ion-segment-button value="Apuntados" checked>
+      <ion-icon name="hand"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Guardados">
+      <ion-icon name="heart"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Valoraciones">
+      <ion-icon name="star"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list *ngIf="segmento == 'Apuntados'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Últimas sesiones apuntadas</ion-text>
+    </ion-list-header>
+
+    <ion-card *ngFor="let sesion_apuntada of sesiones_apuntadas">
+      <ion-item routerLink="/miembro-detalles/{{sesion_apuntada.login_miembro}}" color="myApp_color4" lines="none">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text color="myApp_color6">
+            <h2><strong>{{sesion_apuntada.nombre_miembro}}</strong></h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-card-content>
+        <ion-icon color="myApp_color3" name="hand"></ion-icon> Se ha apuntado a la <a
+          routerLink="/evento-detalles/{{sesion_apuntada.id_evento}}/sesion-detalles/{{sesion_apuntada.id_sesion}}">sesion</a>
+        del evento:
+        <strong><a
+            routerLink="/evento-detalles/{{sesion_apuntada.id_evento}}">{{sesion_apuntada.titulo_evento}}</a></strong>
+        en {{sesion_apuntada.ciudad_sesion}}
+        <hr>
+        <ion-text color="myApp_color2">{{sesion_apuntada.fechaString}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+  <ion-list *ngIf="segmento == 'Guardados'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Últimos eventos guardados</ion-text>
+    </ion-list-header>
+
+    <ion-card *ngFor="let evento_guardado of eventos_guardados">
+      <ion-item routerLink="/miembro-detalles/{{evento_guardado.login_miembro}}" color="myApp_color4" lines="none">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text color="myApp_color6">
+            <h2><strong>{{evento_guardado.nombre_miembro}}</strong></h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-card-content>
+        <ion-icon color="myApp_color3" name="heart"></ion-icon> Ha guardado el evento: <a
+          routerLink="/evento-detalles/{{evento_guardado.id_evento}}">{{evento_guardado.titulo_evento}}</a>
+        <hr>
+        <ion-text color="myApp_color2">{{evento_guardado.fechaString}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+  <ion-list *ngIf="segmento == 'Valoraciones'">
+    <ion-list-header>
+      <ion-text color="myApp_color2">Últimas valoraciones enviadas</ion-text>
+    </ion-list-header>
+
+    <ion-card *ngFor="let valoracion of valoraciones">
+      <ion-item routerLink="/miembro-detalles/{{valoracion.login_miembro}}" color="myApp_color4" lines="none">
+        <ion-icon class="icono_usuario" name="person"></ion-icon>
+        <ion-label text-wrap>
+          <ion-text color="myApp_color6">
+            <h2><strong>{{valoracion.nombre_miembro}}</strong></h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <ion-card-content>
+        <ion-icon color="myApp_color3" name="star"></ion-icon> Ha valorado el evento <a
+          routerLink="/evento-detalles/{{valoracion.id_evento}}">{{valoracion.titulo_evento}}</a> con puntuación de
+        <strong>{{valoracion.puntuacion}}</strong>: "{{valoracion.comentario}}"
+        <hr>
+        <ion-text color="myApp_color2">{{valoracion.fechaString}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

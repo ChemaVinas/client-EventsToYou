@@ -3,13 +3,14 @@
 
 /** Ionic CSS Variables **/
 :root {
-  /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  /** primary - modified**/
+  --ion-color-primary: #a41df2;
+  --ion-color-primary-rgb: 164, 29, 242;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #901ad5;
+  --ion-color-primary-tint: #ad34f3;
+
 
   /** secondary **/
   --ion-color-secondary: #0cd1e8;
@@ -94,9 +95,15 @@
     --background: #311c38;
   }
 
-  ion-card-subtitle, ion-card-title{
+  ion-card-subtitle,
+  ion-card-title {
     --color: white;
   }
+
+  ion-alert {
+    --background: #311c38 !important;
+  }
+
 }
 
 /** color 1 **/
