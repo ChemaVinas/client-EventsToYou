@@ -62,7 +62,7 @@
       Valoraciones
     </ion-list-header>
 
-    <form onsubmit="">
+    <form *ngIf="!eventoYaValorado" #formularioValoracion="ngForm">
       <ion-item color="myApp_color4" lines="none">
         <ion-label text-wrap>
           <ion-text>
@@ -71,39 +71,29 @@
             </h2>
           </ion-text>
         </ion-label>
-        <ion-button color="myApp_color3" slot="end" type="submit">Enviar</ion-button>
+        <ion-button (click)="onGuardarValoracion(formularioValoracion)" type="submit" color="myApp_color3" slot="end">Enviar</ion-button>
       </ion-item>
 
 
       <ion-item color="myApp_color4" lines="none">
-        <ion-text color="myApp_color3">Puntuación: </ion-text>
-        <ion-select>
-          <ion-select-option value="0.5">0.5</ion-select-option>
-          <ion-select-option value="1">1</ion-select-option>
-          <ion-select-option value="1.5">1.5</ion-select-option>
-          <ion-select-option value="2">2</ion-select-option>
-          <ion-select-option value="2.5">2.5</ion-select-option>
-          <ion-select-option value="3">3</ion-select-option>
-          <ion-select-option value="3.5">3.5</ion-select-option>
-          <ion-select-option value="4">4</ion-select-option>
-          <ion-select-option value="4.5">4.5</ion-select-option>
-          <ion-select-option value="5">5</ion-select-option>
-          <ion-select-option value="5.5">5.5</ion-select-option>
-          <ion-select-option value="6">6</ion-select-option>
-          <ion-select-option value="6.5">6.5</ion-select-option>
-          <ion-select-option value="7">7</ion-select-option>
-          <ion-select-option value="7.5">7.5</ion-select-option>
-          <ion-select-option value="8">8</ion-select-option>
-          <ion-select-option value="8.5">8.5</ion-select-option>
-          <ion-select-option value="9">9</ion-select-option>
-          <ion-select-option value="9.5">9.5</ion-select-option>
-          <ion-select-option value="10">10</ion-select-option>
+        <ion-label position="stacked" color="primary">Puntuacion  
+            <ion-text [hidden]="puntuacion.valid || submitted == false" color="danger">
+                *
+            </ion-text>
+        </ion-label>
+        <ion-select [(ngModel)]="valoracion_miembro.puntuacion" name="puntuacion" cancelText="Atrás" okText="Aceptar" #puntuacion="ngModel" required>
+          <ion-select-option *ngFor="let valor of valor_puntuaciones" value="{{valor}}">{{valor}}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item color="myApp_color4">
-        <ion-label color="myApp_color3" position="stacked">Comentario:</ion-label>
-        <ion-input required type="text" oninput=""></ion-input>
+      <ion-item color="myApp_color4" lines="none">
+        <ion-label position="stacked" color="primary">Comentario  
+            <ion-text [hidden]="comentario.valid || submitted == false" color="danger">
+                *Campo obligatorio
+            </ion-text>
+        </ion-label>
+        <ion-textarea [(ngModel)]="valoracion_miembro.comentario" name="comentario" type="text" placeholder="Descripción de evento" #comentario="ngModel" required>
+        </ion-textarea>
       </ion-item>
 
     </form>
@@ -128,7 +118,10 @@
         <ion-text color="white">
           "{{valoracion.comentario}}"
         </ion-text>
-
+        
+        <div *ngIf="valoracion.login_miembro == login_actual_miembro" class="align-right">
+          <ion-button (click)="onEliminarValoracion(valoracion)" color="danger" fill="outline" shape="round" size="small">Eliminar</ion-button>
+        </div>
       </ion-label>
     </ion-item>
 

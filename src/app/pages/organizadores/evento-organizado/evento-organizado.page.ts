@@ -38,84 +38,13 @@ export class EventoOrganizadoPage implements OnInit {
   }
 
   async ngOnInit() {
-
-    console.log('ngOnInit evento-organizado page');
-
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando..',
-    });
-
-    await loading.present();
-
-    this.proveedorEventos.obtenerEvento(this.id_evento)
-      .subscribe(
-        async (data) => {
-          this.evento = data;
-          await loading.dismiss();
-        },
-        (error) => {
-          console.log(error);
-          loading.dismiss();
-        }
-      );
-
-    this.proveedorEventos.obtenerValoracionesEvento(this.id_evento)
-      .subscribe(
-        async (data) => {
-          this.valoraciones = data;
-
-          if (this.valoraciones != null) {
-            //Convertimos la fecha y almacenamos la hora
-            for (let valoracion of this.valoraciones) {
-              var fecha_sesion = new Date(valoracion.fecha);
-
-              var fecha = fecha_sesion.toLocaleDateString();
-              var hora = fecha_sesion.toLocaleTimeString();
-              valoracion.fechaString = fecha + " - " + hora;
-            }
-          }
-
-          await loading.dismiss();
-        },
-        (error) => {
-          console.log(error);
-          loading.dismiss();
-        }
-      );
+    this.obtenerEvento();
+    this.obtenerValoracionesEvento();
   }
 
+  //función que sirve para actualizar las sesiones si se viene de eliminar una sesión
   async ionViewWillEnter() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Cargando..',
-    });
-
-    await loading.present();
-
-    this.proveedorEventos.obtenerSesionesEvento(this.id_evento)
-      .subscribe(
-        async (data) => {
-          this.sesiones = data;
-
-          if (this.sesiones != null) {
-            //Convertimos la fecha y almacenamos la hora
-            for (let sesion of this.sesiones) {
-              var fecha_sesion = new Date(sesion.fecha);
-
-              var fecha = fecha_sesion.toLocaleDateString();
-              var hora = fecha_sesion.getHours().toString();
-              var minutos = fecha_sesion.getMinutes().toString();
-              if (minutos.length < 2) minutos = '0' + minutos;
-              sesion.fechaString = fecha + " - " + hora + ":" + minutos;
-            }
-          }
-
-          await loading.dismiss();
-        },
-        (error) => {
-          console.log(error);
-          loading.dismiss();
-        }
-      );
+    this.obtenerSesionesEvento();
   }
 
   async presentGuardarEventoModalForm() {
@@ -134,26 +63,7 @@ export class EventoOrganizadoPage implements OnInit {
     modal.onDidDismiss().then(async (data) => {
 
       if (data.data.eventoGuardado) {
-
-        const loading = await this.loadingCtrl.create({
-          message: 'Cargando..',
-        });
-
-        await loading.present();
-
-        this.proveedorEventos.obtenerEvento(this.id_evento)
-          .subscribe(
-            async (data) => {
-              this.evento = data;
-              await loading.dismiss();
-              this.presentToast('Evento guardado correctamente.');
-            },
-            (error) => {
-              console.log(error);
-              loading.dismiss();
-            }
-          );
-
+        this.obtenerEvento();
       }
 
     });
@@ -173,39 +83,7 @@ export class EventoOrganizadoPage implements OnInit {
     modal.onDidDismiss().then(async (data) => {
 
       if (data.data.sesionGuardada) {
-
-        const loading = await this.loadingCtrl.create({
-          message: 'Cargando..',
-        });
-
-        await loading.present();
-
-        this.proveedorEventos.obtenerSesionesEvento(this.id_evento)
-          .subscribe(
-            async (data) => {
-              this.sesiones = data;
-
-              if (this.sesiones != null) {
-                //Convertimos la fecha y almacenamos la hora
-                for (let sesion of this.sesiones) {
-                  var fecha_sesion = new Date(sesion.fecha);
-
-                  var fecha = fecha_sesion.toLocaleDateString();
-                  var hora = fecha_sesion.getHours().toString();
-                  var minutos = fecha_sesion.getMinutes().toString();
-                  if (minutos.length < 2) minutos = '0' + minutos;
-                  sesion.fechaString = fecha + " - " + hora + ":" + minutos;
-                }
-              }
-
-              await loading.dismiss();
-            },
-            (error) => {
-              console.log(error);
-              loading.dismiss();
-            }
-          );
-
+        this.obtenerSesionesEvento();
       }
 
     });
@@ -262,6 +140,96 @@ export class EventoOrganizadoPage implements OnInit {
         async (data) => {
           await loading.dismiss();
           this.router.navigate(['/organizador-perfil/login_organizador1']);
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
+
+
+
+  async obtenerEvento() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorEventos.obtenerEvento(this.id_evento)
+      .subscribe(
+        async (data) => {
+          this.evento = data;
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
+
+
+  async obtenerValoracionesEvento() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorEventos.obtenerValoracionesEvento(this.id_evento)
+      .subscribe(
+        async (data) => {
+          this.valoraciones = data;
+
+          if (this.valoraciones != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let valoracion of this.valoraciones) {
+              var fecha_sesion = new Date(valoracion.fecha);
+
+              var fecha = fecha_sesion.toLocaleDateString();
+              var hora = fecha_sesion.toLocaleTimeString();
+              valoracion.fechaString = fecha + " - " + hora;
+            }
+          }
+
+          await loading.dismiss();
+        },
+        (error) => {
+          console.log(error);
+          loading.dismiss();
+        }
+      );
+  }
+
+
+  async obtenerSesionesEvento() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    this.proveedorEventos.obtenerSesionesEvento(this.id_evento)
+      .subscribe(
+        async (data) => {
+          this.sesiones = data;
+
+          if (this.sesiones != null) {
+            //Convertimos la fecha y almacenamos la hora
+            for (let sesion of this.sesiones) {
+              var fecha_sesion = new Date(sesion.fecha);
+
+              var fecha = fecha_sesion.toLocaleDateString();
+              var hora = fecha_sesion.getHours().toString();
+              var minutos = fecha_sesion.getMinutes().toString();
+              if (minutos.length < 2) minutos = '0' + minutos;
+              sesion.fechaString = fecha + " - " + hora + ":" + minutos;
+            }
+          }
+
+          await loading.dismiss();
         },
         (error) => {
           console.log(error);

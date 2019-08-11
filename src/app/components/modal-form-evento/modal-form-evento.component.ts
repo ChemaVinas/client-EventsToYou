@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organizadores.service';
 import { Evento } from 'src/app/interfaces/evento';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 @Component({
   selector: 'app-modal-form-evento',
@@ -12,6 +13,9 @@ import { Evento } from 'src/app/interfaces/evento';
   styleUrls: ['./modal-form-evento.component.scss'],
 })
 export class ModalFormEventoComponent implements OnInit {
+  foto;
+
+  
 
   eventoGuardado: boolean; //< Comprobación si el evento ha sido guardado
 
@@ -24,7 +28,14 @@ export class ModalFormEventoComponent implements OnInit {
   registerForm: FormGroup;
   eventoForm: FormGroup;
 
-  constructor(private proveedorEventos: ProveedorEventosService,
+  constructor(
+    private camera: Camera,
+    
+    
+    
+    
+    
+    private proveedorEventos: ProveedorEventosService,
     private proveedorOrganizadores: ProveedorOrganizadoresService,
     private modalController: ModalController,
     private formBuilder: FormBuilder,
@@ -251,6 +262,22 @@ export class ModalFormEventoComponent implements OnInit {
     } else {
       this.presentAlertError();
     }
+  }
+
+
+
+  tomarFoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+      this.foto = 'data:image/jpeg;base64,' + imageData
+    });
   }
 
 }

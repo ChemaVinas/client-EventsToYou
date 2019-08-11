@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { EventoGuardado } from 'src/app/interfaces/EventoGuardado';
 import { SesionApuntada } from 'src/app/interfaces/SesionApuntada';
 import { Valoracion } from 'src/app/interfaces/valoracion';
+import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 
 @Component({
   selector: 'app-miembro-detalles',
@@ -23,9 +24,11 @@ export class MiembroDetallesPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
+    private proveedorEventos: ProveedorEventosService,
     private proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private alertController: AlertController) {
     //Obtenemos el login del miembro como parámetro
     this.login = this.activatedRoute.snapshot.paramMap.get('login');
   }
@@ -176,6 +179,42 @@ export class MiembroDetallesPage implements OnInit {
         break;
       }
     }
+  }
+
+  async eliminarValoracion(valoracion) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: 'Eliminar valoración del evento: ' + valoracion.titulo_evento,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorEventos.eliminarValoracion(
+              "login_miembro1",
+              valoracion.id_evento,
+              valoracion.id)
+              .subscribe(
+                async (data) => {
+                  this.getValoraciones();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
   }
 
 }

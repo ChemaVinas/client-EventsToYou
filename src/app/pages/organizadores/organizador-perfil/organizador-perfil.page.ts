@@ -56,7 +56,40 @@ export class OrganizadorPerfilPage implements OnInit {
       );
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
+    this.obtenerEventosDeOrganizador();
+  }
+
+  async presentGuardarEventoModalForm() {
+    const modal = await this.modalController.create({
+      component: ModalFormEventoComponent,
+      componentProps: {
+        'nuevoEvento': true
+      }
+    });
+
+    modal.onDidDismiss().then(async (data) => {
+
+      if (data.data.eventoGuardado) {
+        this.obtenerEventosDeOrganizador();
+      }
+
+    });
+
+    return await modal.present();
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Evento guardado correctamente.',
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
+
+  async obtenerEventosDeOrganizador() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando..',
     });
@@ -75,113 +108,4 @@ export class OrganizadorPerfilPage implements OnInit {
         }
       );
   }
-
-  ngOnChanges() {
-    console.log('ngOnChanges organizador-perfil page');
-  }
-
-  /*ngDoCheck() {
-    console.log('ngDoCheck organizador-perfil page');
-  }
-
-  ngAfterContentChecked() {
-    console.log('ngAfterContentChecked organizador-perfil page');
-  }
-
-  ngAfterViewChecked() {
-    console.log('ngAfterViewChecked organizador-perfil page');
-  }*/
-
-
-
-
-
-  ngAfterViewInit() {
-    console.log('ngAfterViewInit organizador-perfil page');
-  }
-
-  ngAfterContentInit() {
-    console.log('ngAfterContentInit organizador-perfil page');
-  }
-
-  ngOnDestroy() {
-    console.log('ngOnDestroy organizador-perfil page');
-  }
-
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter organizador-perfil page');
-  }
-
-
-
-  ionViewWillLeave() {
-    console.log('ionViewWillLeave organizador-perfil page');
-  }
-
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave organizador-perfil page');
-  }
-
-  ionViewWillUnload() {
-    console.log('ionViewWillUnload organizador-perfil page');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad organizador-perfil page');
-  }
-
-  ionViewCanEnter() {
-    console.log('ionViewCanEnter organizador-perfil page');
-  }
-
-  ionViewCanLeave() {
-    console.log('ionViewCanLeave organizador-perfil page');
-  }
-
-
-  async presentGuardarEventoModalForm() {
-    const modal = await this.modalController.create({
-      component: ModalFormEventoComponent,
-      componentProps: {
-        'nuevoEvento': true
-      }
-    });
-
-    modal.onDidDismiss().then(async (data) => {
-
-      if (data.data.eventoGuardado) {
-
-        const loading = await this.loadingCtrl.create({
-          message: 'Cargando..',
-        });
-
-        await loading.present();
-
-        this.proveedorOrganizadores.obtenerEventosDeOrganizador(this.login)
-          .subscribe(
-            async (data) => {
-              this.eventos = data;
-              await loading.dismiss();
-              this.presentToast();
-            },
-            (error) => {
-              console.log(error);
-              loading.dismiss();
-            }
-          );
-      }
-
-    });
-
-    return await modal.present();
-  }
-
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Evento guardado correctamente.',
-      duration: 2000
-    });
-    toast.present();
-  }
-
 }

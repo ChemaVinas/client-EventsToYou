@@ -1,5 +1,7 @@
 {
   "name": "client-EventsToYou",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

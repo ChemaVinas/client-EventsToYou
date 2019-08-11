@@ -14,6 +14,8 @@ import { ProveedorEventosService } from './providers/proveedor-eventos.service';
 import { ProveedorMiembrosService } from './providers/proveedor-miembros.service';
 import { ProveedorOrganizadoresService } from './providers/proveedor-organizadores.service';
 
+import { Camera } from '@ionic-native/Camera/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +26,7 @@ import { ProveedorOrganizadoresService } from './providers/proveedor-organizador
     HttpClientModule
   ],
   providers: [
+    Camera,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
