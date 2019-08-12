@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Búsquedas
+    </ion-title>
+    <ion-button fill="clear" slot="end">
+      <ion-icon slot="icon-only" color="myApp_color3" name="search"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment (ionChange)="segmentoCambiado($event)" value="Eventos" color="myApp_color3">
+    <ion-segment-button value="Eventos" checked>
+      <ion-icon name="pint"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Miembros">
+      <ion-icon name="people"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Organizadores">
+      <ion-icon name="glasses"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="segmento == 'Eventos'">
+    <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaEvento($event)"
+      placeholder="Buscar eventos"></ion-searchbar>
+
+    <ion-card routerLink="/evento-detalles/{{evento.id}}" *ngFor="let evento of eventos">
+      <ion-card-header>
+        <ion-card-subtitle class="align-right">
+          <ion-text color="myApp_color2">Organizado por {{evento.nombre_organizador}}
+          </ion-text>
+        </ion-card-subtitle>
+        <ion-card-title>{{evento.titulo}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+
+
+
+  <ion-list *ngIf="segmento == 'Miembros'">
+    <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaMiembro($event)"
+      placeholder="Buscar usuarios"></ion-searchbar>
+
+    <ion-item routerLink="/miembro-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
+      <ion-avatar slot="start">
+        <img [src]="'data:image/JPEG;base64,' + usuario.avatar" />
+      </ion-avatar>
+      <ion-label text-wrap>
+        {{usuario.nombre}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-list *ngIf="segmento == 'Organizadores'">
+    <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaOrganizador($event)"
+      placeholder="Buscar organizadores"></ion-searchbar>
+
+    <ion-item routerLink="/organizador-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
+      <ion-avatar slot="start">
+        <img [src]="'data:image/JPEG;base64,' + usuario.avatar" />
+      </ion-avatar>
+      <ion-label text-wrap>
+        {{usuario.nombre}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

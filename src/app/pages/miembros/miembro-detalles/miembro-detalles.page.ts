@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -28,7 +28,9 @@ export class MiembroDetallesPage implements OnInit {
     private proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private cd: ChangeDetectorRef) {
     //Obtenemos el login del miembro como parámetro
     this.login = this.activatedRoute.snapshot.paramMap.get('login');
   }
@@ -87,6 +89,7 @@ export class MiembroDetallesPage implements OnInit {
               sesion_apuntada.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -118,6 +121,7 @@ export class MiembroDetallesPage implements OnInit {
               evento_guardado.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -149,6 +153,7 @@ export class MiembroDetallesPage implements OnInit {
               valoracion.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -202,6 +207,13 @@ export class MiembroDetallesPage implements OnInit {
               valoracion.id)
               .subscribe(
                 async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Valoración eliminada correctamente",
+                    duration: 2000
+                  });
+                  toast.present();
+
                   this.getValoraciones();
                 },
                 (error) => {
@@ -215,6 +227,139 @@ export class MiembroDetallesPage implements OnInit {
 
     await alert.present();
 
+  }
+
+  async eliminarSesionApuntada(sesion_apuntada) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: 'Eliminar la asistencia al evento: ' + sesion_apuntada.titulo_evento +
+        ' en ' + sesion_apuntada.ciudad_sesion,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorMiembros.desapuntarseASesion(
+              "login_miembro1", sesion_apuntada.id)
+              .subscribe(
+                async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Sesion desapuntada correctamente",
+                    duration: 2000
+                  });
+                  toast.present();
+
+                  this.getSesionesApuntadas();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async eliminarEventoGuardado(evento_guardado) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: 'Dejar de guardar el evento: ' + evento_guardado.titulo_evento,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorMiembros.dejarDeGuardarEvento(
+              "login_miembro1", evento_guardado.id)
+              .subscribe(
+                async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Has dejado de guardar el evento correctamente",
+                    duration: 2000
+                  });
+                  toast.present();
+
+                  this.getEventosGuardados();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async seguirAlMiembro() {
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: 'Seguir al miembro: ' + this.miembro.nombre,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorMiembros.seguirMiembro(
+              "login_miembro1", this.miembro.login)
+              .subscribe(
+                async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Miembro seguido",
+                    duration: 2000
+                  });
+                  toast.present();
+
+                },
+                async (error) => {
+                  //No se puede seguir a un miembro ya seguido
+                  if (error.status == 409) {
+                    const toast = await this.toastController.create({
+                      message: "¡Ya has seguido a este miembro anteriormente!",
+                      duration: 2000
+                    });
+                    toast.present();
+                  };
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+  refresh(){
+    this.cd.detectChanges();
   }
 
 }

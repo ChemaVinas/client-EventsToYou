@@ -31,6 +31,10 @@ export class ProveedorEventosService {
     return this.http.get<Evento>(this.REST_SERVICE_URI+'/'+id);
   }
 
+  buscarEventos(patron){
+    return this.http.get<Evento[]>(this.REST_SERVICE_URI+'?patron='+patron);
+  }
+
   obtenerSesionesEvento(id){
     return this.http.get<Sesion[]>(this.REST_SERVICE_URI+'/'+id+'/sesiones');
   }

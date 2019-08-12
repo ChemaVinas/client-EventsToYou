@@ -17,13 +17,16 @@
 <ion-content>
 
   <ion-list>
-    <ion-item routerLink="/miembro-detalles/{{amigo.login}}" *ngFor="let amigo of amigos">
-      <ion-avatar slot="start">
+    <ion-item *ngFor="let amigo of amigos">
+      <ion-avatar routerLink="/miembro-detalles/{{amigo.login}}" slot="start">
         <img [src]="'data:image/JPEG;base64,' + amigo.avatar" />
       </ion-avatar>
       <ion-label text-wrap>
-        {{amigo.nombre}} - @{{amigo.login}}
+        {{amigo.nombre}}
       </ion-label>
+      <ion-button (click)="dejarDeSeguirAMiembro(amigo)" slot="end" color="myApp_color4" fill="clear" size="small">
+        <ion-icon color="danger" name="close-circle"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 

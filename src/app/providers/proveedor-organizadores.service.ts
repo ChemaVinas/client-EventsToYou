@@ -28,6 +28,10 @@ export class ProveedorOrganizadoresService {
     return this.http.get<Evento[]>(this.REST_SERVICE_URI + '/' + login + '/eventos');
   }
 
+  buscarOrganizadores(patron){
+    return this.http.get<Usuario[]>(this.REST_SERVICE_URI+'?patron='+patron);
+  }
+
   crearEvento(login, evento) {
     return this.http.post(this.REST_SERVICE_URI + '/' + login + '/eventos', evento/*,
     {

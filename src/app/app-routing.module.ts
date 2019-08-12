@@ -31,6 +31,9 @@ const routes: Routes = [
   },
   { path: 'evento-organizado/:eventoId/sesion-organizada/:sesionId',
     loadChildren: './pages/organizadores/sesion-organizada/sesion-organizada.module#SesionOrganizadaPageModule'
+  },
+  { path: 'busquedas',
+    loadChildren: './pages/miembros/busquedas/busquedas.module#BusquedasPageModule'
   }
   /*{
     path: '',
