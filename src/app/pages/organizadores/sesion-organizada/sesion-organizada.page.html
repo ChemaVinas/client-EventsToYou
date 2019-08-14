@@ -11,6 +11,11 @@
 
 <ion-content>
 
+  <div>
+    <ion-button (click)="presentAlertDeleteConfirm()" expand="block" color="danger" fill="outline" shape="round" size="small">Eliminar
+      sesión</ion-button>
+  </div>
+
   <ion-list *ngIf="sesion" lines="inset">
 
     <ion-item>
@@ -29,13 +34,7 @@
     </ion-item>
   </ion-list>
 
-  <ion-item lines="none">
-    <ion-img class="imagen-mapa" src="../../../assets/img/mapa_ejemplo.PNG"></ion-img>
-  </ion-item>
-
-  <div class="align-right">
-    <ion-button (click)="presentAlertDeleteConfirm()" color="danger" fill="outline" shape="round" size="small">Eliminar sesión</ion-button>
-  </div>
+  <div #mapCanvas class="map-canvas align-center"></div>
 
 </ion-content>
 

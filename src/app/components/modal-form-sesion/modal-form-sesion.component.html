@@ -51,12 +51,13 @@
         <ion-datetime [(ngModel)]="hora_sesion" name="hora_sesion" displayFormat="HH:mm"
           placeholder="Selecciona la hora" required></ion-datetime>
       </ion-item>
-
     </ion-list>
-
-    <div class="ion-padding">
-      <ion-button (click)="onGuardarSesion(formularioSesion)" type="submit" expand="block">Guardar sesion</ion-button>
-    </div>
   </form>
+
+  <div #mapCanvas class="map-canvas align-center"></div>
+
+  <div class="ion-padding">
+    <ion-button (click)="onGuardarSesion(formularioSesion)" type="submit" expand="block">Guardar sesion</ion-button>
+  </div>
 
 </ion-content>

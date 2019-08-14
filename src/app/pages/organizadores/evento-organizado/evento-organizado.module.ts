@@ -9,6 +9,7 @@ import { EventoOrganizadoPage } from './evento-organizado.page';
 import { ModalFormEventoComponent } from 'src/app/components/modal-form-evento/modal-form-evento.component';
 import { CompartidoModule } from 'src/app/components/moduleCompartido/compartido.module';
 import { ModalFormSesionComponent } from 'src/app/components/modal-form-sesion/modal-form-sesion.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     CompartidoModule
   ],
   declarations: [ModalFormSesionComponent, EventoOrganizadoPage],
-  entryComponents: [ModalFormEventoComponent, ModalFormSesionComponent]
+  entryComponents: [ModalFormEventoComponent, ModalFormSesionComponent],
+  providers: [Geolocation]
 })
 export class EventoOrganizadoPageModule {}

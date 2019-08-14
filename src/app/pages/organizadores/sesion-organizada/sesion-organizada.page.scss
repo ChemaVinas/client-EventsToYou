@@ -1,5 +1,18 @@
-.align-right {
-    text-align: right;
-    padding-right: 5px;
-    padding-bottom: 5px;
+.map-canvas {
+    //position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    height: 55%;
+    width: 95%;
+
+    background-color: transparent;
+
+    opacity: 0;
+    transition: opacity 150ms ease-in;
+}
+
+.show-map {
+    opacity: 1;
 }

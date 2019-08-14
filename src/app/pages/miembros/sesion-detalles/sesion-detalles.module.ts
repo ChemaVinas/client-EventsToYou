@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { SesionDetallesPage } from './sesion-detalles.page';
 
+//import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +23,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SesionDetallesPage]
+  declarations: [SesionDetallesPage]/*,
+  providers: [Geolocation]*/
 })
 export class SesionDetallesPageModule {}

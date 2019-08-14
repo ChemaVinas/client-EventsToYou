@@ -7,4 +7,6 @@ export interface Sesion {
     fecha?: Date;
     fechaString?: string;
     horaString?: string;
+    latitud: number;
+    longitud: number;
 }
