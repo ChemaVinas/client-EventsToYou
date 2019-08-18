@@ -8,6 +8,7 @@ import { Sesion } from 'src/app/interfaces/sesion';
 import { Valoracion } from 'src/app/interfaces/valoracion';
 import { NgForm } from '@angular/forms';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-evento-detalles',
@@ -37,12 +38,13 @@ export class EventoDetallesPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private toastController: ToastController,
-    private cd: ChangeDetectorRef) {
+    private cd: ChangeDetectorRef,
+    private authenticationService: AuthenticationService) {
     //Obtenemos el id del evento como parámetro
     this.id_evento = this.activatedRoute.snapshot.paramMap.get('eventoId');
     this.valor_puntuaciones = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
     this.valoracion_miembro = { puntuacion: null, comentario: "" };
-    this.login_actual_miembro = "login_miembro1";
+    this.login_actual_miembro = this.authenticationService.credenciales.value.login;
     this.eventoYaValorado = false;
   }
 
@@ -112,8 +114,7 @@ export class EventoDetallesPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorEventos.crearValoracion(
-      "login_miembro1",
+    this.proveedorMiembros.crearValoracion(
       this.evento.id,
       this.valoracion_miembro)
       .subscribe(
@@ -170,9 +171,7 @@ export class EventoDetallesPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorEventos.eliminarValoracion(
-      "login_miembro1",
-      this.evento.id,
+    this.proveedorMiembros.eliminarValoracion(
       valoracion.id)
       .subscribe(
         async (data) => {
@@ -212,7 +211,7 @@ export class EventoDetallesPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.proveedorMiembros.guardarEvento(
-              "login_miembro1", this.evento.id)
+              this.evento.id)
               .subscribe(
                 async (data) => {
 

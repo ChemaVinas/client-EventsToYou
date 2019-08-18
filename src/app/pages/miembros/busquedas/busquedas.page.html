@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-back-button defaultHref="/miembros"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Búsquedas
@@ -30,7 +30,7 @@
     <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaEvento($event)"
       placeholder="Buscar eventos"></ion-searchbar>
 
-    <ion-card routerLink="/evento-detalles/{{evento.id}}" *ngFor="let evento of eventos">
+    <ion-card routerLink="/miembros/evento-detalles/{{evento.id}}" *ngFor="let evento of eventos">
       <ion-card-header>
         <ion-card-subtitle class="align-right">
           <ion-text color="myApp_color2">Organizado por {{evento.nombre_organizador}}
@@ -47,7 +47,7 @@
     <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaMiembro($event)"
       placeholder="Buscar usuarios"></ion-searchbar>
 
-    <ion-item routerLink="/miembro-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
+    <ion-item routerLink="/miembros/miembro-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
       <ion-avatar slot="start">
         <img [src]="'data:image/JPEG;base64,' + usuario.avatar" />
       </ion-avatar>
@@ -63,7 +63,7 @@
     <ion-searchbar [(ngModel)]="patronBusqueda" (ionChange)="busquedaCambiadaOrganizador($event)"
       placeholder="Buscar organizadores"></ion-searchbar>
 
-    <ion-item routerLink="/organizador-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
+    <ion-item routerLink="/miembros/organizador-detalles/{{usuario.login}}" *ngFor="let usuario of usuarios">
       <ion-avatar slot="start">
         <img [src]="'data:image/JPEG;base64,' + usuario.avatar" />
       </ion-avatar>

@@ -1,10 +1,11 @@
 export interface Usuario {
     login: string;
+    clave?: string;
     nombre: string;
-    biografia: string;
-    descripcion: string;
-    fecha_alta: Date;
-    fechaString: string;
-    web: string;
-    ubicacion: string;
+    ubicacion?: string;
+    biografia?: string;
+    descripcion?: string;
+    web?: string;
+    fecha_alta?: Date;
+    fechaString?: string;
 }

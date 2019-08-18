@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
       Perfil
@@ -39,7 +39,9 @@
   </ion-item>
 
   <div class="align-right">
-    <ion-button color="myApp_color3" (click)="presentGuardarEventoModalForm()"><ion-icon slot="start" name="add"></ion-icon>Crear evento</ion-button>
+    <ion-button color="myApp_color3" (click)="presentGuardarEventoModalForm()">
+      <ion-icon slot="start" name="add"></ion-icon>Crear evento
+    </ion-button>
   </div>
 
   <ion-list>
@@ -67,7 +69,7 @@
           <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
         </ion-chip>
         <ion-button fill="clear" size="small" color="myApp_color2" slot="end"
-          routerLink="/evento-organizado/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
+          routerLink="/organizadores/evento-organizado/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
       </ion-item>
 
     </ion-card>

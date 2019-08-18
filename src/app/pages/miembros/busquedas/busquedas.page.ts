@@ -20,14 +20,9 @@ export class BusquedasPage implements OnInit {
   usuarios: Usuario[];
   eventos: Evento[];
 
-  constructor(private navCtrl: NavController,
-    private proveedorEventos: ProveedorEventosService,
+  constructor(private proveedorEventos: ProveedorEventosService,
     private proveedorMiembros: ProveedorMiembrosService,
-    private proveedorOrganizadores: ProveedorOrganizadoresService,
-    private activatedRoute: ActivatedRoute,
-    private loadingCtrl: LoadingController,
-    private alertController: AlertController,
-    private toastController: ToastController) {}
+    private proveedorOrganizadores: ProveedorOrganizadoresService) {}
 
   ngOnInit() {
     this.segmento = "Eventos";

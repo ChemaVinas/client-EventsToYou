@@ -57,7 +57,7 @@
 
     <ion-slide *ngFor="let sesion of sesiones">
       <ion-icon size="large" color="myApp_color1" name="arrow-dropleft"></ion-icon>
-      <ion-card routerLink="/evento-organizado/{{evento.id}}/sesion-organizada/{{sesion.id_sesion}}">
+      <ion-card routerLink="/organizadores/evento-organizado/{{evento.id}}/sesion-organizada/{{sesion.id_sesion}}">
         <ion-card-header>
           <ion-card-title>{{sesion.fechaString}}</ion-card-title>
           <ion-card-subtitle color="myApp_color3">
@@ -71,7 +71,7 @@
   </ion-slides>
 
   <ion-list>
-    <ion-list-header color="myApp_color1">
+    <ion-list-header *ngIf="valoraciones" color="myApp_color1">
       Valoraciones de miembros
     </ion-list-header>
 

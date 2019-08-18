@@ -139,7 +139,7 @@ export class EventoOrganizadoPage implements OnInit {
       .subscribe(
         async (data) => {
           await loading.dismiss();
-          this.router.navigate(['/organizador-perfil/login_organizador1']);
+          this.router.navigate(['/organizadores/organizador-perfil/login_organizador1']);
         },
         (error) => {
           console.log(error);

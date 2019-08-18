@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h1 class="titulo-app">EventsToYou</h1>
+
+  <ion-segment (ionChange)="segmentoCambiado($event)" value="Miembro" color="myApp_color3">
+    <ion-segment-button value="Miembro" checked>
+      <ion-icon name="person"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Organizador">
+      <ion-icon name="glasses"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <form #formularioUsuario="ngForm">
+    <ion-list>
+      <ion-list-header>
+        <ion-label *ngIf="segmento == 'Miembro'">
+          <ion-text color="myApp_color6">Entrar como miembro</ion-text>
+        </ion-label>
+        <ion-label *ngIf="segmento == 'Organizador'">
+          <ion-text color="myApp_color6">Entrar como organizador</ion-text>
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Login
+          <ion-text [hidden]="login.valid || submitted == false" color="danger">
+            *Campo obligatorio
+          </ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="credenciales.login" name="login" type="text" #login="ngModel" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" color="primary">Clave
+          <ion-text [hidden]="clave.valid || submitted == false" color="danger">
+            *Campo obligatorio
+          </ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="credenciales.clave" name="clave" type="password" #clave="ngModel" required>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button *ngIf="segmento == 'Miembro'" (click)="loginMiembro(formularioUsuario)" type="submit" expand="block">
+        Entrar</ion-button>
+      <ion-button *ngIf="segmento == 'Organizador'" (click)="loginOrganizador(formularioUsuario)" type="submit"
+        expand="block">Entrar</ion-button>
+    </div>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="myApp_color4" class="align-center">
+    <div>¿No estás registrado/a?</div> 
+    <div>Entra <a (click)="presentUsuarioModalForm()">aquí</a> para crear tu perfil</div>
+  </ion-toolbar>
+</ion-footer>

@@ -6,15 +6,14 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { EventoGuardado } from 'src/app/interfaces/EventoGuardado';
 import { SesionApuntada } from 'src/app/interfaces/SesionApuntada';
 import { Valoracion } from 'src/app/interfaces/valoracion';
-import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'app-miembro-detalles',
-  templateUrl: './miembro-detalles.page.html',
-  styleUrls: ['./miembro-detalles.page.scss'],
+  selector: 'app-miembro-perfil',
+  templateUrl: './miembro-perfil.page.html',
+  styleUrls: ['./miembro-perfil.page.scss'],
 })
-export class MiembroDetallesPage implements OnInit {
+export class MiembroPerfilPage implements OnInit {
 
   miembro: Usuario;
   eventos_guardados: EventoGuardado[];
@@ -22,7 +21,6 @@ export class MiembroDetallesPage implements OnInit {
   valoraciones: Valoracion[];
   login: any;
   segmento;
-  desactivar_seguir: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -32,12 +30,13 @@ export class MiembroDetallesPage implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private cd: ChangeDetectorRef,
-    private authenticationService: AuthenticationService) {
+    private storage: Storage) {
     //Obtenemos el login del miembro como parámetro
-    this.login = this.activatedRoute.snapshot.paramMap.get('login');
-    if (this.login == this.authenticationService.credenciales.value.login){
-      this.desactivar_seguir = true;
-    } else this.desactivar_seguir = false;
+    storage.get("credenciales").then(value => {
+      if (value) {
+        this.login = value.login;
+      }
+    });
   }
 
   async ngOnInit() {
@@ -94,6 +93,7 @@ export class MiembroDetallesPage implements OnInit {
               sesion_apuntada.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -125,6 +125,7 @@ export class MiembroDetallesPage implements OnInit {
               evento_guardado.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -156,6 +157,7 @@ export class MiembroDetallesPage implements OnInit {
               valoracion.fechaString = fecha + " - " + hora;
             }
           }
+          this.refresh();
           await loading.dismiss();
         },
         (error) => {
@@ -188,10 +190,10 @@ export class MiembroDetallesPage implements OnInit {
     }
   }
 
-  async seguirAlMiembro() {
+  async eliminarValoracion(valoracion) {
     const alert = await this.alertController.create({
-      header: 'Confirmar',
-      message: 'Seguir al miembro: ' + this.miembro.nombre,
+      header: 'Confirmar eliminación',
+      message: 'Eliminar valoración del evento: ' + valoracion.titulo_evento,
       buttons: [
         {
           text: 'Cancelar',
@@ -203,27 +205,20 @@ export class MiembroDetallesPage implements OnInit {
         }, {
           text: 'Aceptar',
           handler: () => {
-            this.proveedorMiembros.seguirMiembro(
-              this.miembro.login)
+            this.proveedorMiembros.eliminarValoracion(
+              valoracion.id)
               .subscribe(
                 async (data) => {
 
                   const toast = await this.toastController.create({
-                    message: "Miembro seguido",
+                    message: "Valoración eliminada correctamente",
                     duration: 2000
                   });
                   toast.present();
 
+                  this.getValoraciones();
                 },
-                async (error) => {
-                  //No se puede seguir a un miembro ya seguido
-                  if (error.status == 409) {
-                    const toast = await this.toastController.create({
-                      message: "¡Ya has seguido a este miembro anteriormente!",
-                      duration: 2000
-                    });
-                    toast.present();
-                  };
+                (error) => {
                   console.log(error);
                 }
               );
@@ -233,6 +228,92 @@ export class MiembroDetallesPage implements OnInit {
     });
 
     await alert.present();
+
+  }
+
+  async eliminarSesionApuntada(sesion_apuntada) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: 'Eliminar la asistencia al evento: ' + sesion_apuntada.titulo_evento +
+        ' en ' + sesion_apuntada.ciudad_sesion,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorMiembros.desapuntarseASesion(
+              sesion_apuntada.id)
+              .subscribe(
+                async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Sesion desapuntada correctamente",
+                    duration: 2000
+                  });
+                  toast.present();
+
+                  this.getSesionesApuntadas();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async eliminarEventoGuardado(evento_guardado) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: 'Dejar de guardar el evento: ' + evento_guardado.titulo_evento,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.proveedorMiembros.dejarDeGuardarEvento(
+              evento_guardado.id)
+              .subscribe(
+                async (data) => {
+
+                  const toast = await this.toastController.create({
+                    message: "Has dejado de guardar el evento correctamente",
+                    duration: 2000
+                  });
+                  toast.present();
+
+                  this.getEventosGuardados();
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  refresh() {
+    this.cd.detectChanges();
   }
 
 }

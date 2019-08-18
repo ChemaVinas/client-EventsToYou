@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-back-button defaultHref="/miembros"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Organizador
     </ion-title>
-    <ion-button fill="clear" slot="end" routerLink="/busquedas">
+    <ion-button fill="clear" slot="end" routerLink="/miembros/busquedas">
       <ion-icon slot="icon-only" color="myApp_color2" name="search"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -61,12 +61,12 @@
       </ion-card-content>
 
       <ion-item lines="none" color="myApp_color1">
-        <ion-chip routerLink="/categoria-eventos/{{evento.categoria}}">
+        <ion-chip routerLink="/miembros/categoria-eventos/{{evento.categoria}}">
           <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
           <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
         </ion-chip>
         <ion-button fill="clear" size="small" color="myApp_color2" slot="end"
-          routerLink="/evento-detalles/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
+          routerLink="/miembros/evento-detalles/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
       </ion-item>
 
     </ion-card>

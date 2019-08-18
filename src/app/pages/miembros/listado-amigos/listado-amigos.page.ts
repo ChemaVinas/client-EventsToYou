@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NavController, LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
-import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organizadores.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
@@ -14,9 +13,7 @@ export class ListadoAmigosPage implements OnInit {
   amigos: Usuario[];
 
   constructor(
-    private navCtrl: NavController,
     private proveedorMiembros: ProveedorMiembrosService,
-    private proveedorOrganizadores: ProveedorOrganizadoresService,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,
@@ -36,7 +33,7 @@ export class ListadoAmigosPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorMiembros.obtenerMiembrosSeguidos('login_miembro1')
+    this.proveedorMiembros.obtenerMiembrosSeguidos()
       .subscribe(
         async (data) => {
           this.amigos = data;
@@ -66,7 +63,7 @@ export class ListadoAmigosPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.proveedorMiembros.dejarSeguirMiembro(
-              "login_miembro1", amigo.login)
+              amigo.login)
               .subscribe(
                 async (data) => {
 

@@ -13,7 +13,6 @@ export class InicioPage {
   eventos: Evento[];
 
   constructor(
-    private navCtrl: NavController,
     private proveedorEventos: ProveedorEventosService,
     private loadingCtrl: LoadingController) { }
 
@@ -39,40 +38,6 @@ export class InicioPage {
         }
       );
 
-  }
-
-  ngAfterViewInit() {
-    console.log('ngAfterViewInit inicio page');
-  }
-
-  ngAfterContentInit() {
-    console.log('ngAfterContentInit inicio page');
-  }
-
-  ngOnDestroy() {
-    console.log('ngOnDestroy inicio page');
-  }
-
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter inicio page');
-  }
-
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter inicio page');
-  }
-
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave inicio page');
-  }
-
-  ionViewDidLoad() {
-
-  }
-
-  //Función provisional, no utilizaremos el navCtrl para redireccionar sino routerLink del html
-  eventoTapped(event, evento) {
-    //this.router.navigate(['/evento-detalles', evento.idEvento]);
-    this.navCtrl.navigateForward('/evento-detalles/' + evento.id);
   }
 
 }

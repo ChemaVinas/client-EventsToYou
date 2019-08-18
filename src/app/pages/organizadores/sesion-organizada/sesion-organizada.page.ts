@@ -100,7 +100,7 @@ export class SesionOrganizadaPage implements OnInit {
       .subscribe(
         async (data) => {
           await loading.dismiss();
-          this.router.navigate(['/evento-organizado/', this.sesion.id_evento]);
+          this.router.navigate(['/organizadores/evento-organizado/', this.sesion.id_evento]);
         },
         (error) => {
           console.log(error);

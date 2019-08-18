@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-back-button defaultHref="/miembros"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Evento
@@ -15,7 +15,7 @@
     <ion-card-header>
       <ion-card-subtitle class="align-right">
         <ion-text color="myApp_color2">Organizado por <a
-            routerLink="/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text>
+            routerLink="/miembros/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text>
       </ion-card-subtitle>
       <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
     </ion-card-header>
@@ -33,7 +33,7 @@
     </ion-card-content>
 
     <ion-item lines="none" color="myApp_color1">
-      <ion-chip routerLink="/categoria-eventos/{{evento.categoria}}">
+      <ion-chip routerLink="/miembros/categoria-eventos/{{evento.categoria}}">
         <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
         <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
       </ion-chip>
@@ -47,7 +47,7 @@
   <ion-slides pager="false" [options]="slideOpts">
     <ion-slide *ngFor="let sesion of sesiones">
       <ion-icon *ngIf="sesion != sesiones[0]" size="large" color="myApp_color1" name="arrow-dropleft"></ion-icon>
-      <ion-card routerLink="/evento-detalles/{{evento.id}}/sesion-detalles/{{sesion.id_sesion}}">
+      <ion-card routerLink="/miembros/evento-detalles/{{evento.id}}/sesion-detalles/{{sesion.id_sesion}}">
         <ion-card-header>
           <ion-card-title>{{sesion.fechaString}}</ion-card-title>
           <ion-card-subtitle color="myApp_color3">
@@ -118,7 +118,7 @@
         </ion-text>
 
         <ion-text color="myApp_color3">
-          <a routerLink="/miembro-detalles/{{valoracion.login_miembro}}">{{valoracion.nombre_miembro}}</a>:
+          <a routerLink="/miembros/miembro-detalles/{{valoracion.login_miembro}}">{{valoracion.nombre_miembro}}</a>:
         </ion-text>
 
         <ion-text color="white">

@@ -217,7 +217,6 @@ export class ModalFormEventoComponent implements OnInit {
     if (this.nuevoEvento) {
 
       this.proveedorOrganizadores.crearEvento(
-        "login_organizador1",
         this.evento)
         .subscribe(
           async (data) => {
@@ -234,7 +233,6 @@ export class ModalFormEventoComponent implements OnInit {
     } else {
 
       this.proveedorOrganizadores.modificarEvento(
-        "login_organizador1",
         this.evento)
         .subscribe(
           async (data) => {

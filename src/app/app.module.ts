@@ -15,6 +15,9 @@ import { ProveedorMiembrosService } from './providers/proveedor-miembros.service
 import { ProveedorOrganizadoresService } from './providers/proveedor-organizadores.service';
 
 import { Camera } from '@ionic-native/Camera/ngx';
+import { IonicStorageModule } from '@ionic/storage'
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +26,8 @@ import { Camera } from '@ionic-native/Camera/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     Camera,
@@ -32,7 +36,9 @@ import { Camera } from '@ionic-native/Camera/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ProveedorEventosService,
     ProveedorMiembrosService,
-    ProveedorOrganizadoresService
+    ProveedorOrganizadoresService,
+    AuthenticationService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

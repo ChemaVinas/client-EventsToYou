@@ -1,14 +1,47 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: '',
-    loadChildren: './pages/miembros/tabs/tabs.module#TabsPageModule'
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: './pages/login/login.module#LoginPageModule',
+    data: {
+      preload: true
+    },
+  },
+  {
+    path: 'miembros',
+    canActivate: [AuthGuardService],
+    data: {
+      rol: "Miembro"
+    },
+    loadChildren: './pages/miembros/miembro-routing.module#MiembroRoutingModule'
+  },
+  {
+    path: 'organizadores',
+    canActivate: [AuthGuardService],
+    data: {
+      rol: "Organizador"
+    },
+    loadChildren: './pages/organizadores/organizador-routing.module#OrganizadorRoutingModule'
+  }/*
+  { 
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },*/
+  /*{ path: 'login',
+    loadChildren: './pages/login/login.module#LoginPageModule'
   },
   { path: 'evento-detalles/:eventoId',
     loadChildren: './pages/miembros/evento-detalles/evento-detalles.module#EventoDetallesPageModule'
   },
   { path: 'evento-detalles/:eventoId/sesion-detalles/:sesionId',
+    canActivate: [AuthGuardService],
     loadChildren: './pages/miembros/sesion-detalles/sesion-detalles.module#SesionDetallesPageModule'
   },
   { path: 'listado-amigos',
@@ -34,7 +67,7 @@ const routes: Routes = [
   },
   { path: 'busquedas',
     loadChildren: './pages/miembros/busquedas/busquedas.module#BusquedasPageModule'
-  }
+  }*/
   /*{
     path: '',
     redirectTo: '/app/tabs/home',

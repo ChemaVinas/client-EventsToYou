@@ -16,16 +16,13 @@ export class UltimaActividadPage implements OnInit {
   eventos_guardados: EventoGuardado[];
   sesiones_apuntadas: SesionApuntada[];
   valoraciones: Valoracion[];
-  mi_login;
   segmento;
 
   constructor(
     private navCtrl: NavController,
     private proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
-    private loadingCtrl: LoadingController) {
-      this.mi_login = "login_miembro1"; //< Login provisional
-    }
+    private loadingCtrl: LoadingController) {}
 
   async ngOnInit() {
 
@@ -43,7 +40,7 @@ export class UltimaActividadPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorMiembros.obtenerSesionesApuntadasAmigos(this.mi_login)
+    this.proveedorMiembros.obtenerSesionesApuntadasAmigos()
       .subscribe(
         async (data) => {
           this.sesiones_apuntadas = data;
@@ -74,7 +71,7 @@ export class UltimaActividadPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorMiembros.obtenerEventosGuardadosAmigos(this.mi_login)
+    this.proveedorMiembros.obtenerEventosGuardadosAmigos()
       .subscribe(
         async (data) => {
           this.eventos_guardados = data;
@@ -105,7 +102,7 @@ export class UltimaActividadPage implements OnInit {
 
     await loading.present();
 
-    this.proveedorMiembros.obtenerValoracionesAmigos(this.mi_login)
+    this.proveedorMiembros.obtenerValoracionesAmigos()
       .subscribe(
         async (data) => {
           this.valoraciones = data;

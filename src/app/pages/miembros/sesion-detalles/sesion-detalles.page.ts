@@ -84,7 +84,7 @@ export class SesionDetallesPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.ProveedorMiembros.apuntarseASesion(
-              "login_miembro1", this.sesion.id_sesion)
+              this.sesion.id_sesion)
               .subscribe(
                 async (data) => {
 
@@ -93,7 +93,7 @@ export class SesionDetallesPage implements OnInit {
                     duration: 4000
                   });
                   toast.present();
-                  this.router.navigate(['/evento-detalles/' + this.id_evento]);
+                  this.router.navigate(['/miembros/evento-detalles/' + this.id_evento]);
 
                 },
                 async (error) => {

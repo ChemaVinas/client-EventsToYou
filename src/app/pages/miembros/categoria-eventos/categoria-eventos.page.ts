@@ -15,7 +15,6 @@ export class CategoriaEventosPage implements OnInit {
   categoria;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorEventos: ProveedorEventosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {

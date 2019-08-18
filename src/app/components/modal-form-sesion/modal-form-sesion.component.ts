@@ -131,7 +131,6 @@ export class ModalFormSesionComponent implements OnInit {
     await loading.present();
 
     this.proveedorOrganizadores.crearSesion(
-      "login_organizador1",
       this.id_evento,
       this.sesion)
       .subscribe(

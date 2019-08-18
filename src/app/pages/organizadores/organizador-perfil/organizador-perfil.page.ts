@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalFormEventoComponent } from 'src/app/components/modal-form-evento/modal-form-evento.component';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Evento } from 'src/app/interfaces/evento';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-organizador-perfil',
@@ -23,9 +24,14 @@ export class OrganizadorPerfilPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private modalController: ModalController,
-    private toastController: ToastController) {
-    //Obtenemos el login del organizador como parámetro
-    this.login = this.activatedRoute.snapshot.paramMap.get('login');
+    private toastController: ToastController,
+    private storage: Storage) {
+    //Obtenemos el login del organizador desde memoria
+    storage.get("credenciales").then(value => {
+      if (value) {
+        this.login = value.login;
+      }
+    });
   }
 
   async ngOnInit() {

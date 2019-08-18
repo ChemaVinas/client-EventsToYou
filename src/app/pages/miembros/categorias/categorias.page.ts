@@ -12,10 +12,8 @@ export class CategoriasPage implements OnInit {
   categorias;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorEventos: ProveedorEventosService,
-    private loadingCtrl: LoadingController,
-    private modalController: ModalController) { }
+    private loadingCtrl: LoadingController) { }
 
   async ngOnInit() {
 

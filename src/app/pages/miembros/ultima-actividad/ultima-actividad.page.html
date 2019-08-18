@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button defaultHref="/miembros"></ion-menu-button>
     </ion-buttons>
     <ion-title>
       Última actividad
     </ion-title>
-    <ion-button fill="clear" slot="end" routerLink="/busquedas">
+    <ion-button fill="clear" slot="end" routerLink="/miembros/busquedas">
       <ion-icon slot="icon-only" color="myApp_color2" name="search"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -37,7 +37,7 @@
     </ion-list-header>
 
     <ion-card *ngFor="let sesion_apuntada of sesiones_apuntadas">
-      <ion-item routerLink="/miembro-detalles/{{sesion_apuntada.login_miembro}}" color="myApp_color4" lines="none">
+      <ion-item routerLink="/miembros/miembro-detalles/{{sesion_apuntada.login_miembro}}" color="myApp_color4" lines="none">
         <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
           <ion-text color="myApp_color6">
@@ -47,10 +47,10 @@
       </ion-item>
       <ion-card-content>
         <ion-icon color="myApp_color3" name="hand"></ion-icon> Se ha apuntado a la <a
-          routerLink="/evento-detalles/{{sesion_apuntada.id_evento}}/sesion-detalles/{{sesion_apuntada.id_sesion}}">sesion</a>
+          routerLink="/miembros/evento-detalles/{{sesion_apuntada.id_evento}}/sesion-detalles/{{sesion_apuntada.id_sesion}}">sesion</a>
         del evento:
         <strong><a
-            routerLink="/evento-detalles/{{sesion_apuntada.id_evento}}">{{sesion_apuntada.titulo_evento}}</a></strong>
+            routerLink="/miembros/evento-detalles/{{sesion_apuntada.id_evento}}">{{sesion_apuntada.titulo_evento}}</a></strong>
         en {{sesion_apuntada.ciudad_sesion}}
         <hr>
         <ion-text color="myApp_color2">{{sesion_apuntada.fechaString}}</ion-text>
@@ -65,7 +65,7 @@
     </ion-list-header>
 
     <ion-card *ngFor="let evento_guardado of eventos_guardados">
-      <ion-item routerLink="/miembro-detalles/{{evento_guardado.login_miembro}}" color="myApp_color4" lines="none">
+      <ion-item routerLink="/miembros/miembro-detalles/{{evento_guardado.login_miembro}}" color="myApp_color4" lines="none">
         <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
           <ion-text color="myApp_color6">
@@ -75,7 +75,7 @@
       </ion-item>
       <ion-card-content>
         <ion-icon color="myApp_color3" name="heart"></ion-icon> Ha guardado el evento: <a
-          routerLink="/evento-detalles/{{evento_guardado.id_evento}}">{{evento_guardado.titulo_evento}}</a>
+          routerLink="/miembros/evento-detalles/{{evento_guardado.id_evento}}">{{evento_guardado.titulo_evento}}</a>
         <hr>
         <ion-text color="myApp_color2">{{evento_guardado.fechaString}}</ion-text>
       </ion-card-content>
@@ -89,7 +89,7 @@
     </ion-list-header>
 
     <ion-card *ngFor="let valoracion of valoraciones">
-      <ion-item routerLink="/miembro-detalles/{{valoracion.login_miembro}}" color="myApp_color4" lines="none">
+      <ion-item routerLink="/miembros/miembro-detalles/{{valoracion.login_miembro}}" color="myApp_color4" lines="none">
         <ion-icon class="icono_usuario" name="person"></ion-icon>
         <ion-label text-wrap>
           <ion-text color="myApp_color6">
@@ -99,7 +99,7 @@
       </ion-item>
       <ion-card-content>
         <ion-icon color="myApp_color3" name="star"></ion-icon> Ha valorado el evento <a
-          routerLink="/evento-detalles/{{valoracion.id_evento}}">{{valoracion.titulo_evento}}</a> con puntuación de
+          routerLink="/miembros/evento-detalles/{{valoracion.id_evento}}">{{valoracion.titulo_evento}}</a> con puntuación de
         <strong>{{valoracion.puntuacion}}</strong>: "{{valoracion.comentario}}"
         <hr>
         <ion-text color="myApp_color2">{{valoracion.fechaString}}</ion-text>

@@ -47,12 +47,4 @@ export class ProveedorEventosService {
     return this.http.get<Valoracion[]>(this.REST_SERVICE_URI+'/'+id+'/valoraciones');
   }
 
-  crearValoracion(login, id_evento, valoracion){
-    return this.http.post(this.REST_SERVICE_URI+'/'+id_evento+'/valoraciones?login=' + login, valoracion);
-  }
-
-  eliminarValoracion(login, id_evento, id_valoracion){
-    return this.http.delete(this.REST_SERVICE_URI+'/'+id_evento+'/valoraciones/'+ id_valoracion +'?login=' + login);
-  }
-
 }
