@@ -15,19 +15,28 @@
     <ion-card-header>
       <ion-card-subtitle class="align-right">
         <ion-text color="myApp_color2">Organizado por <a
-            routerLink="/miembros/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a></ion-text>
+            routerLink="/miembros/organizador-detalles/{{evento.login_organizador}}">{{evento.nombre_organizador}}</a>
+        </ion-text>
       </ion-card-subtitle>
       <ion-card-title>Título: {{evento.titulo}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <div>
-        Puntuación media:
+        <ion-text color="myApp_color6">Puntuación media:</ion-text>
         <ion-text color="myApp_color3">
-          <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+          {{evento.valoracion_media}}<ion-icon name="star"></ion-icon>
         </ion-text>
       </div>
-      <div>Web: <a href="">{{evento.web_entradas}}</a></div>
+      <div>
+        <ion-text color="myApp_color6">Total asistentes:</ion-text>
+        <ion-text color="myApp_color3">
+          {{evento.total_asistentes}}<ion-icon name="people"></ion-icon>
+        </ion-text>
+      </div>
+      <div>
+        <ion-text color="myApp_color6">Web: </ion-text><a href="">{{evento.web_entradas}}</a>
+      </div>
       <div>{{evento.descripcion}}</div>
 
     </ion-card-content>
@@ -37,7 +46,7 @@
         <ion-icon color="myApp_color3" name="pricetags"></ion-icon>
         <ion-label color="myApp_color3">{{evento.categoria}}</ion-label>
       </ion-chip>
-      <ion-button (click)="guardarEvento()" color="danger" size="small" slot="end">Guardar 
+      <ion-button (click)="guardarEvento()" color="danger" size="small" slot="end">Guardar
         <ion-icon color="light" name="heart"></ion-icon>
       </ion-button>
     </ion-item>

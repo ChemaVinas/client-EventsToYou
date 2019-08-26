@@ -6,5 +6,6 @@ export interface Evento {
     login_organizador?: string;
     nombre_organizador?: string;
     valoracion_media?: number;
+    total_asistentes?: number;
     web_entradas: string;
 }

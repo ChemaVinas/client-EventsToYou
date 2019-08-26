@@ -11,10 +11,14 @@ import { Evento } from 'src/app/interfaces/evento';
 export class InicioPage {
 
   eventos: Evento[];
+  filtro_ciudad: string;
+  ciudades_disponibles;
 
   constructor(
     private proveedorEventos: ProveedorEventosService,
-    private loadingCtrl: LoadingController) { }
+    private loadingCtrl: LoadingController) {
+    this.filtro_ciudad = "Todas";
+  }
 
   async ngOnInit() {
 
@@ -25,6 +29,16 @@ export class InicioPage {
     });
 
     await loading.present();
+
+    this.proveedorEventos.obtenerCiudadesDeProximasSesiones()
+      .subscribe(
+        async (data) => {
+          this.ciudades_disponibles = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
     this.proveedorEventos.obtenerEventos()
       .subscribe(
@@ -38,6 +52,45 @@ export class InicioPage {
         }
       );
 
+  }
+
+  async ciudadCambiada($event) {
+    var ciudad = $event.detail.value;
+    console.log(ciudad);
+
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando..',
+    });
+
+    await loading.present();
+
+    if (ciudad == 'Todas') {
+      this.proveedorEventos.obtenerEventos()
+        .subscribe(
+          async (data) => {
+            this.eventos = data;
+            await loading.dismiss();
+          },
+          (error) => {
+            console.log(error);
+            loading.dismiss();
+          }
+        );
+
+    } else {
+      this.proveedorEventos.obtenerEventosCiudad(ciudad)
+        .subscribe(
+          async (data) => {
+            this.eventos = data;
+            await loading.dismiss();
+          },
+          (error) => {
+            console.log(error);
+            loading.dismiss();
+          }
+        );
+    }
+    
   }
 
 }

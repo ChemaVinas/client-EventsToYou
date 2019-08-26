@@ -94,7 +94,6 @@ export class SesionOrganizadaPage implements OnInit {
     await loading.present();
 
     this.proveedorOrganizadores.eliminarSesion(
-      "login_organizador1",
       this.sesion.id_evento,
       this.sesion.id_sesion)
       .subscribe(

@@ -134,7 +134,6 @@ export class EventoOrganizadoPage implements OnInit {
     await loading.present();
 
     this.proveedorOrganizadores.eliminarEvento(
-      "login_organizador1",
       this.evento.id)
       .subscribe(
         async (data) => {

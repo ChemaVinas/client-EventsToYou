@@ -10,6 +10,13 @@
       <ion-icon slot="icon-only" color="myApp_color2" name="search"></ion-icon>
     </ion-button>
   </ion-toolbar>
+  <ion-item lines="full">
+    <ion-text color="myApp_color3">Ciudad:</ion-text>
+    <ion-select name="ciudad" cancelText="Atrás" okText="Aceptar" (ionChange)="ciudadCambiada($event)">
+      <ion-select-option selected value="Todas">Todas</ion-select-option>
+      <ion-select-option *ngFor="let ciudad of ciudades_disponibles" value="{{ciudad}}">{{ciudad}}</ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-header>
 
 <ion-content>
@@ -27,8 +34,14 @@
       </ion-card-header>
 
       <ion-card-content>
+        <ion-text color="myApp_color6">Puntuación media: </ion-text>
         <ion-text color="myApp_color3">
-          Puntuación media: <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+          {{evento.valoracion_media}}<ion-icon name="star"></ion-icon>
+        </ion-text>
+        <hr>
+        <ion-text color="myApp_color6">Total asistentes: </ion-text>
+        <ion-text color="myApp_color3">
+          {{evento.total_asistentes}}<ion-icon name="people"></ion-icon>
         </ion-text>
         <hr>
         {{evento.descripcion}}

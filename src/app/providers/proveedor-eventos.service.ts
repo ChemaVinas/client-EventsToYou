@@ -27,6 +27,14 @@ export class ProveedorEventosService {
     return this.http.get<Evento[]>(this.REST_SERVICE_URI+'/categorias/'+categoria);
   }
 
+  obtenerCiudadesDeProximasSesiones(){
+    return this.http.get(this.REST_SERVICE_URI+'/ciudades');
+  }
+
+  obtenerEventosCiudad(ciudad){
+    return this.http.get<Evento[]>(this.REST_SERVICE_URI+'/ciudad/'+ciudad);
+  }
+
   obtenerEvento(id){
     return this.http.get<Evento>(this.REST_SERVICE_URI+'/'+id);
   }

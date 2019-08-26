@@ -21,12 +21,20 @@
 
     <ion-card-content>
       <div>
-        Puntuación media:
+        <ion-text color="myApp_color6">Puntuación media:</ion-text>
         <ion-text color="myApp_color3">
-          <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+          {{evento.valoracion_media}}<ion-icon name="star"></ion-icon>
         </ion-text>
       </div>
-      <div>Web: <a href="">{{evento.web_entradas}}</a></div>
+      <div>
+        <ion-text color="myApp_color6">Total asistentes:</ion-text>
+        <ion-text color="myApp_color3">
+          {{evento.total_asistentes}}<ion-icon name="people"></ion-icon>
+        </ion-text>
+      </div>
+      <div>
+        <ion-text color="myApp_color6">Web: </ion-text><a href="">{{evento.web_entradas}}</a>
+      </div>
       <div>{{evento.descripcion}}</div>
 
       <div class="align-right">
