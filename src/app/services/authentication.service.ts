@@ -20,6 +20,9 @@ export class AuthenticationService {
   //rol_autenticado = new BehaviorSubject(null);
   credenciales = new BehaviorSubject<Credenciales>(null);
 
+  REST_SERVICE_URI = 'http://192.168.43.33:8080/EventsToYou';
+  //REST_SERVICE_URI = 'http://localhost:8080/EventsToYou';
+
   constructor(private storage: Storage,
     private plt: Platform,
     public http: HttpClient,
@@ -31,7 +34,7 @@ export class AuthenticationService {
   }
 
   login_miembro(login_usuario, clave) {
-    this.http.get<Usuario>("http://localhost:8080/EventsToYou/miembros/" + login_usuario,
+    this.http.get<Usuario>(this.REST_SERVICE_URI+"/miembros/" + login_usuario,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -75,7 +78,7 @@ export class AuthenticationService {
   }
 
   login_organizador(login_usuario, clave) {
-    this.http.get<Usuario>("http://localhost:8080/EventsToYou/organizadores/" + login_usuario,
+    this.http.get<Usuario>(this.REST_SERVICE_URI+"/organizadores/" + login_usuario,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -119,7 +122,7 @@ export class AuthenticationService {
   }
 
   registrar_miembro(usuario: Usuario) {
-    this.http.post("http://localhost:8080/EventsToYou/miembros", usuario).subscribe(
+    this.http.post(this.REST_SERVICE_URI+"/miembros", usuario).subscribe(
       async (data) => {
         const toast = await this.toastController.create({
           message: "Bienvenido " + usuario.nombre,
@@ -159,7 +162,7 @@ export class AuthenticationService {
   }
 
   registrar_organizador(usuario: Usuario) {
-    this.http.post("http://localhost:8080/EventsToYou/organizadores", usuario).subscribe(
+    this.http.post(this.REST_SERVICE_URI+"/organizadores", usuario).subscribe(
       async (data) => {
         const toast = await this.toastController.create({
           message: "Bienvenido " + usuario.nombre,

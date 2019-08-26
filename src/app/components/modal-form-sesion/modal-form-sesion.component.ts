@@ -189,6 +189,7 @@ export class ModalFormSesionComponent implements OnInit {
     const rta = await this.geolocation.getCurrentPosition();
     this.obtenerDatosPosicion(rta.coords.latitude, rta.coords.longitude, API_KEY);
     var myLatLng = { lat: rta.coords.latitude, lng: rta.coords.longitude };
+    //var myLatLng = { lat: 37.777022, lng: -3.794393 };
 
     const map = new googleMaps.Map(mapEle, {
       center: myLatLng,
