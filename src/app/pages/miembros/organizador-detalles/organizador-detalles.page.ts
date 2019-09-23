@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organizadores.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -17,7 +17,6 @@ export class OrganizadorDetallesPage implements OnInit {
   login: any;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorOrganizadores: ProveedorOrganizadoresService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {

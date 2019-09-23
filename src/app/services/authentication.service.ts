@@ -4,7 +4,6 @@ import { Platform, ToastController, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ModalFormUsuarioComponent } from '../components/modal-form-usuario/modal-form-usuario.component';
 
 interface Credenciales {
   login: string;
@@ -17,7 +16,6 @@ interface Credenciales {
 })
 export class AuthenticationService {
 
-  //rol_autenticado = new BehaviorSubject(null);
   credenciales = new BehaviorSubject<Credenciales>(null);
 
   REST_SERVICE_URI = 'http://192.168.43.33:8080/EventsToYou';
@@ -136,9 +134,7 @@ export class AuthenticationService {
           rol: "Miembro"
         };
 
-        console.log("a guardar:", usuario);
         this.storage.set("credenciales", credenciales).then(res => {
-          console.log("guardado:", usuario);
           this.credenciales.next(credenciales);
           this.modalController.dismiss();
           return true;

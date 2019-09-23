@@ -17,8 +17,7 @@ export class ProveedorMiembrosService {
   httpHeaders: HttpHeaders;
   login: string;
 
-  REST_SERVICE_URI = 'http://192.168.43.33:8080/EventsToYou/miembros';
-  //REST_SERVICE_URI = 'http://localhost:8080/EventsToYou/miembros';
+  REST_SERVICE_URI = 'http://localhost:8080/EventsToYou/miembros';
 
   constructor(public http: HttpClient, private storage: Storage,
     private authenticationService: AuthenticationService) {

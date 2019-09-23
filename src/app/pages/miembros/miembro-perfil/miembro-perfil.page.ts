@@ -23,9 +23,7 @@ export class MiembroPerfilPage implements OnInit {
   segmento;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorMiembros: ProveedorMiembrosService,
-    private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,

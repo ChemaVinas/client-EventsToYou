@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
-import { ActivatedRoute } from '@angular/router';
 import { EventoGuardado } from 'src/app/interfaces/EventoGuardado';
 import { SesionApuntada } from 'src/app/interfaces/SesionApuntada';
 import { Valoracion } from 'src/app/interfaces/valoracion';
@@ -19,9 +18,7 @@ export class UltimaActividadPage implements OnInit {
   segmento;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorMiembros: ProveedorMiembrosService,
-    private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController) {}
 
   async ngOnInit() {

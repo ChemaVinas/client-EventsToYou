@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +20,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private authService: AuthenticationService,
     private router: Router,
-    public navCtrl: NavController,
-    private storage: Storage
+    public navCtrl: NavController
   ) {
     this.initializeApp();
   }
@@ -33,7 +31,6 @@ export class AppComponent {
       this.splashScreen.hide();
 
       this.authService.credenciales.subscribe(value => {
-        console.log(value);
         if (value == null) {
           this.appPages = null;
           this.router.navigate(['/login']);

@@ -13,7 +13,6 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): boolean {
     
     var rol = route.data.rol;
-    //return this.authService.estaAutenticado(rol);
 
     if (this.authService.estaAutenticado(rol)){
       return true;
@@ -22,29 +21,5 @@ export class AuthGuardService implements CanActivate {
       return false;
     }
 
-    // If the user is not logged in we'll send them back to the home page
-    /*if (!this.authService.estaAutenticado()) {
-      console.log('No estás logueado');
-      this.router.navigate(['login']);
-      return false;
-    }
-
-    this.router.navigate(['/tabs/inicio']);
-    console.log('Logueado');
-    return true;*/
-
-    //return this.authService.estaAutenticado();
-
-    /*var rol = route.data.rol;
-    console.log("Este es el rol: " + rol)
-
-    var rol_usuario = this.authService.estaAutenticado();
-
-    console.log("Este es el rol del usuario: " + rol_usuario)
-    
-    if (rol === rol_usuario) {
-      return true;
-    }
-    return false;*/
   }
 }

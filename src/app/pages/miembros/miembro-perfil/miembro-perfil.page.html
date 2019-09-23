@@ -98,7 +98,7 @@
       </ion-item>
       <ion-card-content routerLink="/miembros/evento-detalles/{{evento_guardado.id_evento}}">
         <ion-text color="myApp_color3">
-          Punt. media: <ion-icon name="star"></ion-icon>{{evento_guardado.valoracion_media}}
+          Punt. media: <ion-icon name="star"></ion-icon>{{evento_guardado.valoracion_media.toFixed(2)}}
         </ion-text>
         <h2><strong>{{evento_guardado.titulo_evento}}</strong></h2>
         <hr>

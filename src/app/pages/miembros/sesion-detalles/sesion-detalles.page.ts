@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sesion } from 'src/app/interfaces/sesion';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
-//import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-sesion-detalles',
@@ -19,15 +18,13 @@ export class SesionDetallesPage implements OnInit {
   @ViewChild('mapCanvas') mapElement: ElementRef;
 
   constructor(
-    private navCtrl: NavController,
     private ProveedorEventos: ProveedorEventosService,
     private ProveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
     private router: Router,
-    private toastController: ToastController/*,
-    private geolocation: Geolocation*/) {
+    private toastController: ToastController) {
     //Obtenemos el id de la sesion como parámetro
     this.id_sesion = this.activatedRoute.snapshot.paramMap.get('sesionId');
     this.id_evento = this.activatedRoute.snapshot.paramMap.get('eventoId');
@@ -127,10 +124,6 @@ export class SesionDetallesPage implements OnInit {
 
     var myLatLng = { lat: this.sesion.latitud, lng: this.sesion.longitud };
 
-    /*const rta = await this.geolocation.getCurrentPosition();
-    var myLatLng = { lat: rta.coords.latitude, lng: rta.coords.longitude };
-    console.log(myLatLng);*/
-
     const map = new googleMaps.Map(mapEle, {
       center: myLatLng,
       zoom: 15,
@@ -138,27 +131,11 @@ export class SesionDetallesPage implements OnInit {
       streetViewControl: false
     });
 
-    /*const infoWindow = new googleMaps.InfoWindow({
-      content: `<h4 style="color: #a41df2;">` + this.sesion.titulo_evento +  `</h4>`
-    });*/
-
     const marker = new googleMaps.Marker({
       position: myLatLng,
       map,
       title: "Marcador de sesión"
     });
-
-    // Place a draggable marker on the map
-    /*var marker = new googleMaps.Marker({
-      position: myLatLng,
-      map: map,
-      draggable: true,
-      title: "Drag me!"
-    });*/
-
-    /*marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-    });*/
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
       mapEle.classList.add('show-map');

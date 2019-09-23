@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, ModalController, ToastController, AlertController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController, AlertController } from '@ionic/angular';
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalFormEventoComponent } from 'src/app/components/modal-form-evento/modal-form-evento.component';
@@ -16,15 +16,12 @@ import { ModalFormSesionComponent } from 'src/app/components/modal-form-sesion/m
 })
 export class EventoOrganizadoPage implements OnInit {
 
-  eventoInterface: Evento;
-
   id_evento: any;
   evento: Evento;
   sesiones: Sesion[];
   valoraciones: Valoracion[];
 
   constructor(
-    private navCtrl: NavController,
     private proveedorEventos: ProveedorEventosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
@@ -138,7 +135,7 @@ export class EventoOrganizadoPage implements OnInit {
       .subscribe(
         async (data) => {
           await loading.dismiss();
-          this.router.navigate(['/organizadores/organizador-perfil/login_organizador1']);
+          this.router.navigate(['/organizadores/organizador-perfil']);
         },
         (error) => {
           console.log(error);

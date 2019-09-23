@@ -1,8 +1,8 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
-import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Evento } from 'src/app/interfaces/evento';
 import { Sesion } from 'src/app/interfaces/sesion';
 import { Valoracion } from 'src/app/interfaces/valoracion';
@@ -24,19 +24,16 @@ export class EventoDetallesPage implements OnInit {
   sesiones: Sesion[];
   valoraciones: Valoracion[];
   valoracion_miembro: Valoracion;
-  sub;
 
   login_actual_miembro: string;
   eventoYaValorado: boolean;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorEventos: ProveedorEventosService,
     private proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
-    private router: Router,
     private toastController: ToastController,
     private cd: ChangeDetectorRef,
     private authenticationService: AuthenticationService) {
@@ -100,7 +97,6 @@ export class EventoDetallesPage implements OnInit {
     this.submitted = true;
 
     if (form.valid) {
-      console.log('Guardar valoracion: ' + this.valoracion_miembro);
       this.presentAlertConfirm();
     } else {
       this.presentAlertError();
@@ -243,10 +239,6 @@ export class EventoDetallesPage implements OnInit {
 
   }
 
-
-
-
-
   async obtenerEvento() {
     const loading = await this.loadingCtrl.create({
       message: 'Cargando...',
@@ -311,7 +303,6 @@ export class EventoDetallesPage implements OnInit {
       .subscribe(
         async (data) => {
           this.valoraciones = data;
-          console.log(data);
 
           if (this.valoraciones != null) {
             for (let valoracion of this.valoraciones) {

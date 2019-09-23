@@ -8,4 +8,5 @@ export interface Usuario {
     web?: string;
     fecha_alta?: Date;
     fechaString?: string;
+    avatar?: any;
 }

@@ -8,8 +8,8 @@ import { Valoracion } from '../interfaces/valoracion';
   providedIn: 'root'
 })
 export class ProveedorEventosService {
-  REST_SERVICE_URI = 'http://192.168.43.33:8080/EventsToYou/eventos';
-  //REST_SERVICE_URI = 'http://localhost:8080/EventsToYou/eventos';
+  
+  REST_SERVICE_URI = 'http://localhost:8080/EventsToYou/eventos';
 
   constructor(public http: HttpClient) {
     console.log('Hello ProveedorEventos Service Provider');

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Sesion } from 'src/app/interfaces/sesion';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organizadores.service';
@@ -18,7 +18,6 @@ export class SesionOrganizadaPage implements OnInit {
   @ViewChild('mapCanvas') mapElement: ElementRef;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorOrganizadores: ProveedorOrganizadoresService,
     private proveedorEventos: ProveedorEventosService,
     private activatedRoute: ActivatedRoute,
@@ -118,10 +117,6 @@ export class SesionOrganizadaPage implements OnInit {
 
     var myLatLng = { lat: this.sesion.latitud, lng: this.sesion.longitud };
 
-    /*const rta = await this.geolocation.getCurrentPosition();
-    var myLatLng = { lat: rta.coords.latitude, lng: rta.coords.longitude };
-    console.log(myLatLng);*/
-
     const map = new googleMaps.Map(mapEle, {
       center: myLatLng,
       zoom: 15,
@@ -129,27 +124,11 @@ export class SesionOrganizadaPage implements OnInit {
       streetViewControl: false
     });
 
-    /*const infoWindow = new googleMaps.InfoWindow({
-      content: `<h4 style="color: #a41df2;">` + this.sesion.titulo_evento +  `</h4>`
-    });*/
-
     const marker = new googleMaps.Marker({
       position: myLatLng,
       map,
       title: "Marcador de sesión"
     });
-
-    // Place a draggable marker on the map
-    /*var marker = new googleMaps.Marker({
-      position: myLatLng,
-      map: map,
-      draggable: true,
-      title: "Drag me!"
-    });*/
-
-    /*marker.addListener('click', () => {
-      infoWindow.open(map, marker);
-    });*/
 
     googleMaps.event.addListenerOnce(map, 'idle', () => {
       mapEle.classList.add('show-map');

@@ -30,11 +30,9 @@ export class ModalFormSesionComponent implements OnInit {
   fecha_min: string;
   fecha_max: string;
 
-  marker: any;
-
   @ViewChild('mapCanvas') mapElement: ElementRef;
 
-  constructor(private proveedorEventos: ProveedorEventosService,
+  constructor(
     private proveedorOrganizadores: ProveedorOrganizadoresService,
     private proveedorReverseGeocodingService: ProveedorReverseGeocodingService,
     private modalController: ModalController,
@@ -45,6 +43,7 @@ export class ModalFormSesionComponent implements OnInit {
 
     public http: HttpClient) {
 
+    //Obtenemos la fecha min y max que se puede asignar
     let fecha_actual = new Date(),
       day = '' + fecha_actual.getDate(),
       month = '' + (fecha_actual.getMonth() + 1),
@@ -72,7 +71,6 @@ export class ModalFormSesionComponent implements OnInit {
   }
 
   dismissModal() {
-    console.log('dismissModal ¿sesion guardada? -> ' + this.sesionGuardada);
     this.modalController.dismiss({
       'sesionGuardada': this.sesionGuardada
     });
@@ -189,7 +187,6 @@ export class ModalFormSesionComponent implements OnInit {
     const rta = await this.geolocation.getCurrentPosition();
     this.obtenerDatosPosicion(rta.coords.latitude, rta.coords.longitude, API_KEY);
     var myLatLng = { lat: rta.coords.latitude, lng: rta.coords.longitude };
-    //var myLatLng = { lat: 37.777022, lng: -3.794393 };
 
     const map = new googleMaps.Map(mapEle, {
       center: myLatLng,

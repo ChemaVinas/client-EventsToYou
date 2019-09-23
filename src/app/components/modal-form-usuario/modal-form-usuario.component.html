@@ -20,6 +20,14 @@
     </ion-segment-button>
   </ion-segment>
 
+  <div class="align-center" *ngIf="foto"><img class="avatar_perfil" [src]="foto" /></div>
+
+  <div class="ion-padding">
+    <ion-button color="myApp_color3" expand="block" (click)="elegirImagen()">
+      <ion-icon slot="start" name="add"></ion-icon>Elegir avatar
+    </ion-button>
+  </div>
+
   <form #formularioUsuario="ngForm">
     <ion-list>
       <ion-list-header>
@@ -57,7 +65,8 @@
             *Campo obligatorio
           </ion-text>
         </ion-label>
-        <ion-input [(ngModel)]="usuario.nombre" placeholder="Nombre de usuario" name="nombre" type="text" #nombre="ngModel" required>
+        <ion-input [(ngModel)]="usuario.nombre" placeholder="Nombre de usuario" name="nombre" type="text"
+          #nombre="ngModel" required>
         </ion-input>
       </ion-item>
 
@@ -67,7 +76,8 @@
             *Campo obligatorio
           </ion-text>
         </ion-label>
-        <ion-input [(ngModel)]="usuario.ubicacion" placeholder="p.e: Jaén" name="ubicacion" type="text" #ubicacion="ngModel" required>
+        <ion-input [(ngModel)]="usuario.ubicacion" placeholder="p.e: Jaén" name="ubicacion" type="text"
+          #ubicacion="ngModel" required>
         </ion-input>
       </ion-item>
 
@@ -77,7 +87,8 @@
             *Campo obligatorio
           </ion-text>
         </ion-label>
-        <ion-textarea [(ngModel)]="usuario.biografia" placeholder="Biografía del miembro" name="biografia" type="text" #biografia="ngModel" required>
+        <ion-textarea [(ngModel)]="usuario.biografia" placeholder="Biografía del miembro" name="biografia" type="text"
+          #biografia="ngModel" required>
         </ion-textarea>
       </ion-item>
 
@@ -87,7 +98,8 @@
             *Campo obligatorio
           </ion-text>
         </ion-label>
-        <ion-input [(ngModel)]="usuario.web" placeholder="Web personal del organizador" name="web" type="text" #web="ngModel" required>
+        <ion-input [(ngModel)]="usuario.web" placeholder="Web personal del organizador" name="web" type="text"
+          #web="ngModel" required>
         </ion-input>
       </ion-item>
 
@@ -97,7 +109,8 @@
             *Campo obligatorio
           </ion-text>
         </ion-label>
-        <ion-textarea [(ngModel)]="usuario.descripcion" placeholder="Descripción del organizador" name="descripcion" type="text" #descripcion="ngModel" required>
+        <ion-textarea [(ngModel)]="usuario.descripcion" placeholder="Descripción del organizador" name="descripcion"
+          type="text" #descripcion="ngModel" required>
         </ion-textarea>
       </ion-item>
     </ion-list>

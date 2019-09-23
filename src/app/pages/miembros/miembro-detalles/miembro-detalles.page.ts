@@ -1,12 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NavController, LoadingController, AlertController, ToastController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ProveedorMiembrosService } from 'src/app/providers/proveedor-miembros.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { EventoGuardado } from 'src/app/interfaces/EventoGuardado';
 import { SesionApuntada } from 'src/app/interfaces/SesionApuntada';
 import { Valoracion } from 'src/app/interfaces/valoracion';
-import { ProveedorEventosService } from 'src/app/providers/proveedor-eventos.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -25,13 +24,11 @@ export class MiembroDetallesPage implements OnInit {
   desactivar_seguir: boolean;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorMiembros: ProveedorMiembrosService,
     private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,
-    private cd: ChangeDetectorRef,
     private authenticationService: AuthenticationService) {
     //Obtenemos el login del miembro como parámetro
     this.login = this.activatedRoute.snapshot.paramMap.get('login');

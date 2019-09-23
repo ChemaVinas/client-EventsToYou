@@ -5,6 +5,7 @@ import { ModalController, AlertController, LoadingController } from '@ionic/angu
 import { Usuario } from 'src/app/interfaces/usuario';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 @Component({
   selector: 'app-modal-form-usuario',
@@ -13,16 +14,16 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class ModalFormUsuarioComponent implements OnInit {
 
+  foto;
   segmento;
   submitted = false;
   usuario: Usuario;
 
-  constructor(private authenticationService: AuthenticationService,
-    private proveedorOrganizadores: ProveedorOrganizadoresService,
-    private proveedorMiembros: ProveedorMiembrosService,
+  constructor(
+    private camera: Camera,
+    private authenticationService: AuthenticationService,
     private modalController: ModalController,
-    private alertController: AlertController,
-    private loadingCtrl: LoadingController) {
+    private alertController: AlertController) {
     this.usuario = {
       login: "",
       nombre: "",
@@ -73,6 +74,7 @@ export class ModalFormUsuarioComponent implements OnInit {
       web: "",
       descripcion: ""
     };
+    this.foto = null;
     this.segmento = ev.detail.value;
   }
 
@@ -91,6 +93,21 @@ export class ModalFormUsuarioComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  elegirImagen(){
+    const options: CameraOptions = {
+      quality: 20,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+      this.foto = 'data:image/jpeg;base64,' + imageData
+      this.usuario.avatar = imageData;
+    });
   }
 
 }

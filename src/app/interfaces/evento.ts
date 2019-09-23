@@ -8,4 +8,5 @@ export interface Evento {
     valoracion_media?: number;
     total_asistentes?: number;
     web_entradas: string;
+    imagen?: any;
 }

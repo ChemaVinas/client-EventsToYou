@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { ProveedorOrganizadoresService } from 'src/app/providers/proveedor-organizadores.service';
-import { ActivatedRoute } from '@angular/router';
 import { ModalFormEventoComponent } from 'src/app/components/modal-form-evento/modal-form-evento.component';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Evento } from 'src/app/interfaces/evento';
@@ -19,9 +18,7 @@ export class OrganizadorPerfilPage implements OnInit {
   login: any;
 
   constructor(
-    private navCtrl: NavController,
     private proveedorOrganizadores: ProveedorOrganizadoresService,
-    private activatedRoute: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private modalController: ModalController,
     private toastController: ToastController,
@@ -35,8 +32,6 @@ export class OrganizadorPerfilPage implements OnInit {
   }
 
   async ngOnInit() {
-
-    console.log('ngOnInit organizador-detalles page');
 
     const loading = await this.loadingCtrl.create({
       message: 'Cargando..',

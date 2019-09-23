@@ -28,7 +28,7 @@
 
       <ion-card-content>
         <ion-text color="myApp_color3">
-          Puntuación media: <ion-icon name="star"></ion-icon>{{evento.valoracion_media}}
+          Puntuación media: <ion-icon name="star"></ion-icon>{{evento.valoracion_media.toFixed(2)}}
         </ion-text>
         <hr>
         {{evento.descripcion}}
@@ -41,7 +41,6 @@
         </ion-chip>
         <ion-button fill="clear" size="small" color="myApp_color2" slot="end"
           routerLink="/miembros/evento-detalles/{{evento.id}}" routerDirection="forward">Ver más</ion-button>
-        <!--<ion-button slot="start" (click)="eventoTapped($event, evento)">Ver (event onclick)</ion-button>-->
       </ion-item>
 
     </ion-card>
